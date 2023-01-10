@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'sl',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +108,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'sl_SI',
 
     /*
     |--------------------------------------------------------------------------
@@ -153,6 +153,7 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+    'Input' => Illuminate\Support\Facades\Input::class,
 
     'providers' => [
 
@@ -209,6 +210,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Carbon' => \Carbon\Carbon::class
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
