@@ -20,10 +20,10 @@
                       :active="request()->routeIs('home')">
             {{ __('Pregled') }}
           </x-nav-link>
-          <x-nav-link :href="route('planner')"
+          <!-- <x-nav-link :href="route('planner')"
                       :active="request()->routeIs('planner')">
             {{ __('Projekti') }}
-          </x-nav-link>
+          </x-nav-link> -->
         </div>
       </div>
 
