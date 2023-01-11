@@ -20,12 +20,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'numbers'])->middleware(['auth', 'verified'])->name('home');
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/planner', function() {
+    return view('planner');
+})->middleware(['auth', 'verified'])->name('planner');;
 
 Route::post('/events', [EventController::class, 'store'])->middleware(['auth', 'verified']);
 Route::delete('/events/{event}', [EventController::class, 'destroy'])->middleware(['auth', 'verified']);

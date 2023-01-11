@@ -15,17 +15,16 @@
         </div>
 
         <!-- Navigation Links -->
-        <!-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-white">
+        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-white">
           <x-nav-link :href="route('home')"
                       :active="request()->routeIs('home')">
             {{ __('Pregled') }}
           </x-nav-link>
-
-
-
-
-
-        </div> -->
+          <x-nav-link :href="route('planner')"
+                      :active="request()->routeIs('planner')">
+            {{ __('Projekti') }}
+          </x-nav-link>
+        </div>
       </div>
 
       <!-- Settings Dropdown -->

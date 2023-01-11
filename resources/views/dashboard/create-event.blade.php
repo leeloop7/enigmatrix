@@ -28,7 +28,7 @@
                 <option class="bg-gray-700" value="00">00</option>
                 <option class="bg-gray-700" value="15">15</option>
                 <option class="bg-gray-700" value="30">30</option>
-                <option class="bg-gray-700" value="045">45</option>
+                <option class="bg-gray-700" value="45">45</option>
               </select>
             </div>
           </div>
@@ -47,7 +47,7 @@
                 <option class="bg-gray-700" value="00">00</option>
                 <option class="bg-gray-700" value="15">15</option>
                 <option class="bg-gray-700" value="30">30</option>
-                <option class="bg-gray-700" value="045">45</option>
+                <option class="bg-gray-700" value="45">45</option>
               </select>
             </div>
           </div>
