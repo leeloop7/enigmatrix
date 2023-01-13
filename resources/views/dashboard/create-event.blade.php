@@ -54,6 +54,8 @@
         </div>
 
       </div>
+
+
       <div class="grid grid-cols-2 space-x-4 my-2">
         <div>
           <label class="text-white font-bold mt-4" for="event_theme">Izberi delo oz. odsotnost</label><br>
@@ -63,13 +65,21 @@
             <option class="bg-gray-700" value="{{ $job->id }}">{{ $job->name }}</option>
             @endforeach
           </select>
-          <label class="text-white font-bold mt-4" for="event_theme">Izberi stranko</label><br>
-          <select name="event_customer" class="block appearance-none w-full bg-transparent border-gray-400 px-4 py-1 pl-2 pr-8 mt-1 mb-4 rounded-lg text-gray-100 text-sm">
+          @livewire('dropdowns')
+          <!-- <label class="text-white font-bold mt-4" for="event_theme">Izberi stranko</label><br>
+          <select id="customer" name="event_customer" class="block appearance-none w-full bg-transparent border-gray-400 px-4 py-1 pl-2 pr-8 mt-1 mb-4 rounded-lg text-gray-100 text-sm">
             <option selected disabled>Izberi stranko</option>
             @foreach($customers as $customer)
             <option class="bg-gray-700" value="{{ $customer->id }}">{{ $customer->name }}</option>
             @endforeach
           </select>
+          <label class="text-white font-bold mt-4" for="event_project">Izberi projekt</label><br>
+          <select id="project" name="event_project" class="block appearance-none w-full bg-transparent border-gray-400 px-4 py-1 pl-2 pr-8 mt-1 mb-4 rounded-lg text-gray-100 text-sm">
+            <option selected disabled>Najprej izberi stranko</option>
+            @foreach($projects as $project)
+            <option class="bg-gray-700" value="{{ $project->id }}">{{ $project->name }}</option>
+            @endforeach
+          </select> -->
           <label class="text-white font-bold mt-4" for="event_theme">Vrsta dela</label><br>
           <select name="event_jobdesc" class="block appearance-none w-full bg-transparent border-gray-400 px-4 py-1 pl-2 pr-8 mt-1 mb-4 rounded-lg text-gray-100 text-sm">
             <option selected disabled>Izberi vrsto dela</option>

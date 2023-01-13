@@ -6,6 +6,7 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
 use App\Models\Job;
+use App\Models\Project;
 use App\Models\JobDesc;
 
 use Carbon\Carbon;
@@ -20,8 +21,11 @@ class DashboardController extends Controller
         // EVENT THEME
         $jobs = Job::all();
 
+        // EVENT ALL PROJECTS
+        $projects = Project::all();
+
         // EVENT DESC CUSTOMER
-        $customers = Customer::all();
+        $customers = Customer::all()->sortBy('name');
 
         // EVENT DESC JOB
         $jobDescriptions = JobDesc::all();
@@ -92,6 +96,8 @@ class DashboardController extends Controller
 
 
 
+
+
         //VIEW
         return view('dashboard')
             ->with('timeOffs', $timeOffs)
@@ -108,9 +114,11 @@ class DashboardController extends Controller
             ->with('difference', $difference)
             ->with('event', $event)
             ->with('jobs', $jobs)
+            ->with('projects', $projects)
             ->with('overHours', $overHours)
             ->with('customers', $customers)
             ->with('jobDescriptions', $jobDescriptions)
             ->with('dates', $dates);
     }
+
 }

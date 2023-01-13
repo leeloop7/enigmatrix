@@ -5,6 +5,7 @@
     @include('dashboard.statistic-line-one')
   </div>
 
+
   <div class="max-w-7xl mx-auto px-8 gap-5" x-data="{ currentDate: null }">
     <div class="fixed inset-0 z-30 flex items-center justify-center overflow-auto bg-white bg-opacity-10" x-show="!!currentDate" x-cloak>
         @include('dashboard.create-event')
@@ -28,6 +29,9 @@
             </th>
             <th scope="col" class="px-4 py-3 text-left tracking-wider">
               PROJEKT
+            </th>
+            <th scope="col" class="px-4 py-3 text-left tracking-wider">
+              STRANKA
             </th>
             <th scope="col" class="px-4 py-3 text-left tracking-wider">
               OPIS
@@ -71,6 +75,9 @@
               <i class="fas fa-circle text-xs @if($event->event_theme == '5')text-blue-500 @elseif($event->event_theme == '6') text-teal-300 @else text-green-500 @endif mr-1"></i> <span class="hidden md:inline">{{ $event->job->name }}</span>
             </td>
             <td>
+                {{ $event->project->name }}
+              </td>
+            <td>
               {{ $event->customer->name }}
             </td>
             <td class="px-4 py-2 whitespace-nowrap">
@@ -99,6 +106,7 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
             <td class="px-4 py-2 grid grid-cols-4 whitespace-nowrap">
               <i @click="currentDate = '{{ $key }}'" class="fa-solid text-white cursor-pointer fa-plus"></i>
             </td>
@@ -108,43 +116,6 @@
         </tbody>
       </table>
   </div>
+
+
 </x-app-layout>
-
-<script>
-  const ctx = document.getElementById('myChart');
-
-  new Chart(ctx, {
-    type: 'doughnut'
-    , data: {
-      labels: ['Delovnih dni', 'Dopust', 'Bolniška']
-      , datasets: [{
-        label: 'Število dni'
-        , data: [{
-          {
-            $totalWorkingDays
-          }
-        }, {
-          {
-            $timeOffs
-          }
-        }, {
-          {
-            $sickDays
-          }
-        }]
-        , backgroundColor: [
-          'rgb(37, 197, 95)'
-          , 'rgb(60, 130, 246)'
-          , 'rgb(240, 69, 69)'
-        ]
-        , borderWidth: 3
-      }]
-    }
-    , options: {
-      scales: {
-
-      }
-    }
-  });
-
-</script>

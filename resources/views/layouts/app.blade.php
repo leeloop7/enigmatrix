@@ -15,7 +15,7 @@
         href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://kit.fontawesome.com/434e87c037.js" crossorigin="anonymous"></script>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -35,10 +35,11 @@
             -->
 
     <!-- Page Content -->
+    @yield('content')
     <main>
       {{ $slot }}
     </main>
   </div>
 </body>
-
+@livewireScripts
 </html>

@@ -23,4 +23,8 @@ class Event extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

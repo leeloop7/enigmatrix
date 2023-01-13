@@ -9,6 +9,11 @@ class Customer extends Model
 {
     public function events()
     {
-        return $this->hasMany(Event::class, 'customer_id');
+        return $this->hasMany(Event::class);
+
+    }
+
+    public function projects(){
+        return $this->belongsToMany(Project::class);
     }
 }

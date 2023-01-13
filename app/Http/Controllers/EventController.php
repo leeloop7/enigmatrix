@@ -19,6 +19,11 @@ class EventController extends Controller
         $event_end = Carbon::parse($event_date)->format('Y-m-d') . ' ' . $req->event_hours_end . ':' . $req->event_minutes_end . ':' . '00';
         $event_theme = $req->event_theme;
         $event_desc = $req->event_desc;
+        if ($req->event_jobdesc != null) {
+            $event_project = $req->event_project;
+        } else {
+            $event_project = 0;
+        }
         if ($req->event_customer != null) {
             $event_customer = $req->event_customer;
         } else {
@@ -36,6 +41,7 @@ class EventController extends Controller
         $event->job_id = $event_theme;
         $event->customer_id = $event_customer;
         $event->job_desc_id = $event_jobdesc;
+        $event->project_id = $event_project;
         $event->event_start = $event_start;
         $event->event_end = $event_end;
         $event->event_theme = $event_theme;
