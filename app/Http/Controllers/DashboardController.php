@@ -46,7 +46,6 @@ class DashboardController extends Controller
         $sum = 0;
         $duration = 0;
         $difference = 0;
-        $event = 0;
         $workingSeconds = 0;
         foreach (Auth::user()->events as $event) {
             $startTime = Carbon::parse($event->event_start);
@@ -95,9 +94,6 @@ class DashboardController extends Controller
         $overHours = $allHours - ($allDays * 8);
 
 
-
-
-
         //VIEW
         return view('dashboard')
             ->with('timeOffs', $timeOffs)
@@ -112,7 +108,6 @@ class DashboardController extends Controller
             ->with('allHours', $allHours)
             ->with('sum', $sum)
             ->with('difference', $difference)
-            ->with('event', $event)
             ->with('jobs', $jobs)
             ->with('projects', $projects)
             ->with('overHours', $overHours)

@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use App\Models\Event;
 use App\Models\Job;
+use App\Models\JobDesc;
+use App\Models\Customer;
+use App\Models\Project;
 use Carbon\Carbon;
 
 class EventController extends Controller
@@ -22,7 +26,7 @@ class EventController extends Controller
         if ($req->event_jobdesc != null) {
             $event_project = $req->event_project;
         } else {
-            $event_project = 0;
+            $event_project = 99;
         }
         if ($req->event_customer != null) {
             $event_customer = $req->event_customer;
@@ -61,5 +65,23 @@ class EventController extends Controller
     {
         $event->delete();
         return redirect()->back()->with('success', 'Dogodek izbrisan!');
+    }
+
+    public function edit($event) {
+
+        $jobs = Job::all();
+        // EVENT ALL PROJECTS
+        $projects = Project::all();
+        // EVENT DESC CUSTOMER
+        $customers = Customer::all()->sortBy('name');
+        // EVENT DESC JOB
+        $jobDescriptions = JobDesc::all();
+
+        $event = Event::find($event);
+        return view ('dashboard.edit-event',compact('event','jobs','customers','projects','jobDescriptions'));
+    }
+
+    public function update(Request $req,$event) {
+        $input = request->all();
     }
 }

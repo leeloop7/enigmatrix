@@ -93,6 +93,7 @@
                 @method('DELETE')
                 <button onclick="return confirm('Ste prepričani, da želite izbrisati dogodek?')"><i class="fa-solid text-white hover:text-gray-900 fa-trash"></i></button>
               </form>
+              <a href="{{url('/events/edit/'.$event->id)}}">EDIT</a>
             </td>
           </tr>
           @empty
