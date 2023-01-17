@@ -24,8 +24,11 @@ class Dropdowns extends Component
 
     public function updatedSelectedCustomer($customer)
     {
-        if (!is_null($customer)) {
+        if ($customer !== "") {
             $this->projects = Customer::findOrFail($customer)->projects;
+        } else {
+            $this->projects = collect();
+            $this->selectedProject = null;
         }
     }
 

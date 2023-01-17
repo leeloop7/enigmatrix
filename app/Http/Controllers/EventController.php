@@ -73,7 +73,7 @@ class EventController extends Controller
         // EVENT ALL PROJECTS
         $projects = Project::all();
         // EVENT DESC CUSTOMER
-        $customers = Customer::all()->sortBy('name');
+        $customers = Customer::all();
         // EVENT DESC JOB
         $jobDescriptions = JobDesc::all();
 

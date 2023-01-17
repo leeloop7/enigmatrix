@@ -4,6 +4,8 @@ use App\Http\Controllers\AdminEventController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\PlannerController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Dropdowns;
 
@@ -21,6 +23,7 @@ use App\Http\Livewire\Dropdowns;
 
 
 Route::get('/', [DashboardController::class, 'numbers'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/planner', [PlannerController::class, 'plans'])->middleware(['auth', 'verified'])->name('planner');
 
 
 Route::get('dropdowns', Dropdowns::class);
@@ -33,9 +36,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/planner', function() {
-    return view('planner');
-})->middleware(['auth', 'verified'])->name('planner');;
 
 Route::post('/events', [EventController::class, 'store'])->middleware(['auth', 'verified']);
 Route::get('/events/edit/{event}', [EventController::class, 'edit'])->middleware(['auth', 'verified']);
