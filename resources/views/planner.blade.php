@@ -13,7 +13,14 @@
                                 <br>
                                 @foreach ($projects as $project)
                                     @if(date('Y-m-d', strtotime($project->start_date)) == $day->format("Y-m-d"))
-                                    <div class="bg-{{ $project->color }} z-30 relative w-{{($project->length+1)*8}} pt-3 h-12 -ml-1 my-4 mt-{{$project->position}} font-bold text-xl">{{ $project->location }}</div>
+                                    <div class="bg-{{ $project->color }} z-30 relative w-{{($project->length+1)*8}} pt-0 px-1 h-12 -ml-1 my-4 mt-{{$project->position}} font-bold text-xl text-left">
+                                        {{ $project->location }} <br>
+                                        <div class="flex flex-nowrap mx-auto text-center">
+                                            @foreach ($project->customers as $customer)
+                                                <span class="text-xs leading-3 whitespace-nowrap mr-2">{{ $customer->name }}</span>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                     @endif
                                 @endforeach
                             </div>
