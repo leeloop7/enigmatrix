@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\CarbonPeriod;
 use Carbon\Carbon;
+use App\Models\Project;
 
 class PlannerController extends Controller
 {
@@ -13,7 +14,6 @@ class PlannerController extends Controller
         $from = '2023-01-01';
         $to = '2023-12-31';
         $months = CarbonPeriod::create($from, '1 month', $to);
-
 
         $calendar = [];
 
@@ -27,8 +27,10 @@ class PlannerController extends Controller
             }
         }
 
+        $projects = Project::all();
 
         return view('planner')
+            ->with('projects', $projects)
             ->with('calendar', $calendar)
             ->with('months', $months);
     }

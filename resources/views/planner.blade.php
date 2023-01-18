@@ -1,14 +1,21 @@
   <x-app-layout>
-    <main class="max-w-7xl px-8 mx-auto my-12 pb-12">
+    <div class="hidden w-8 w-16 w-24 w-32 w-40 w-48 w-56 w-64 w-72 w-80 w-88 w-96 mt-8 mt-24 mt-40 mt-56 mt-72 mt-88 bg-blue-700 bg-gray-600 bg-gray-700 bg-yellow-600 bg-red-900 bg-green-500"></div>
+    <main class="max-w-7xl px-8 mx-auto my-12 pb-12 mt-20">
         <div class="flex flex-nowrap overflow-x-auto scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100 scrollbar-thin border-gray-400 border divide-x">
             @foreach ($calendar as $key => $value)
                 <div class="bg-white bg-opacity-10">
                     <span class="text-2xl block font-bold p-2 text-white">{{ date("F", mktime(0, 0, 0, $key, 1)) }}</span>
-                    <div class="flex flex-nowrap h-96 divide-x divide-gray-400 border-t border-gray-400">
+                    <div class="flex flex-nowrap h-128 divide-x divide-gray-400 border-t border-gray-400">
                         @forelse ($value as $day)
-                            <div class="w-8 px-1 text-center text-gray-100 @if(Carbon::parse($day)->isWeekend()) bg-gray-100 bg-opacity-20 @endif">
+                            <div class="w-8 px-1 text-center text-gray-100 @if(Carbon::parse($day)->isWeekend()) bg-gray-100 bg-opacity-20 @elseif(Carbon::parse($day)->isToday()) bg-pink-500 bg-opacity-40 @endif">
                                 <span class="text-xs">{{ substr($day->translatedFormat("D"),0,3) }}</span> <br>
                                 {{ $day->format("d") }}
+                                <br>
+                                @foreach ($projects as $project)
+                                    @if(date('Y-m-d', strtotime($project->start_date)) == $day->format("Y-m-d"))
+                                    <div class="bg-{{ $project->color }} z-30 relative w-{{($project->length+1)*8}} pt-3 h-12 -ml-1 my-4 mt-{{$project->position}} font-bold text-xl">{{ $project->location }}</div>
+                                    @endif
+                                @endforeach
                             </div>
                         @endforeach
                     </div>
