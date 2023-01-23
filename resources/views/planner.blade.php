@@ -12,11 +12,11 @@
                                 {{ $day->format("d") }}
                                 <br>
                                 @foreach ($projects as $project)
-                                    @if(date('Y-m-d', strtotime($project->montage_start)) == $day->format("Y-m-d"))
+                                    <!-- @if(date('Y-m-d', strtotime($project->montage_start)) == $day->format("Y-m-d"))
                                     <div class="bg-green-500 z-30 relative w-{{($project->montage+1)*8}} pt-0 px-1 h-2 mt-{{($project->position)+12}} -ml-1 my-4 font-bold text-xl text-left">
 
                                     </div>
-                                    @endif
+                                    @endif -->
                                     @if(date('Y-m-d', strtotime($project->start_date)) == $day->format("Y-m-d"))
                                     <div class="bg-{{ $project->color }} z-30 relative w-{{($project->length+1)*8}} pt-0 px-1 h-12 -ml-1 my-4 mt-{{$project->position}} font-bold text-xl text-left">
                                         {{ $project->location }} <br>
@@ -27,11 +27,11 @@
                                         </div>
                                     </div>
                                     @endif
-                                    @if(date('Y-m-d', strtotime($project->demontage_start)) == $day->format("Y-m-d"))
+                                    <!-- @if(date('Y-m-d', strtotime($project->demontage_start)) == $day->format("Y-m-d"))
                                     <div class="bg-green-500 z-30 relative w-{{($project->demontage+1)*8}} pt-0 px-1 h-2 mt-{{($project->position)+12}} -ml-1 my-4 font-bold text-xl text-left">
 
                                     </div>
-                                    @endif
+                                    @endif -->
                                 @endforeach
                             </div>
                         @endforeach
