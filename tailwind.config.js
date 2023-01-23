@@ -18,7 +18,8 @@ module.exports = {
                 '128': '32rem',
               },
               margin: {
-                '88': '22rem'
+                '88': '22rem',
+                '68': '17rem'
               }
         },
     },

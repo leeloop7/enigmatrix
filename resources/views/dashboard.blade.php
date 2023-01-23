@@ -46,7 +46,7 @@
           @foreach ($dates as $key => $value)
 
           @forelse ($value as $event)
-          <tr class="@if($loop->parent->odd) bg-black bg-opacity-10 @endif hover:bg-white hover:bg-opacity-20">
+          <tr class="@if($loop->parent->odd) bg-black bg-opacity-10 @endif hover:bg-white hover:bg-opacity-20 @if(Carbon::parse($key)->isToday()) bg-pink-500 bg-opacity-50 @endif">
             @if ($loop->first)
             <td class="px-4 py-2 font-bold whitespace-nowrapm border-l-4 border-transparent @if(Carbon::parse($key)->isWeekend()) border-red-600 @endif">
                 {{ Carbon::parse($key)->translatedFormat("d.m. l") }}
@@ -72,7 +72,7 @@
               {{ date("H:i", $event->event_difference) }}
             </td>
             <td class="px-4 py-2 whitespace-nowrap">
-              <i class="fas fa-circle text-xs @if($event->event_theme == '5')text-blue-500 @elseif($event->event_theme == '6') text-teal-300 @else text-green-500 @endif mr-1"></i> <span class="hidden md:inline">{{ $event->job->name }}</span>
+              <i class="fas fa-circle text-xs @if($event->event_theme == '5')text-blue-500 @elseif($event->event_theme == '6' or $event->event_theme == '7') text-teal-300 @else text-green-500 @endif mr-1"></i> <span class="hidden md:inline">{{ $event->job->name }}</span>
             </td>
             <td>
                 {{ $event->project->name }}
@@ -85,7 +85,7 @@
             </td>
             <td class="px-4 py-2 grid grid-cols-4 whitespace-nowrap items-center">
               <!-- <i class="fa-solid text-white fa-pen-to-square"></i> -->
-              @if ($loop->first)
+              @if ($loop->last)
               <i @click="currentDate = '{{ $key }}'" class="fa-solid text-white hover:text-gray-900 cursor-pointer fa-plus"></i>
               @endif
               <form method="POST" action="/events/{{ $event->id }}">

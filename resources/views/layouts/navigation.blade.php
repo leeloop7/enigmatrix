@@ -24,6 +24,10 @@
                       :active="request()->routeIs('planner')">
             {{ __('Projekti') }}
           </x-nav-link>
+          <x-nav-link :href="route('statistics')"
+                      :active="request()->routeIs('statistics')">
+            {{ __('Statistika') }}
+          </x-nav-link>
         </div>
       </div>
 

@@ -28,7 +28,7 @@ class DashboardController extends Controller
         $customers = Customer::all()->sortBy('name');
 
         // EVENT DESC JOB
-        $jobDescriptions = JobDesc::all();
+        $jobDescriptions = JobDesc::all()->sortBy('name');
 
         // EVENT CALCULATIONS
         $timeOffs = Auth::user()->events()->whereEventTheme('5')->count();
@@ -69,6 +69,8 @@ class DashboardController extends Controller
             ->select(['event_start', 'job_id'])
             ->where('job_id', '!=', '5')
             ->where('job_id', '!=', '6')
+            ->where('job_id', '!=', '7')
+            ->where('job_id', '!=', '8')
             ->get()
             ->groupBy(function ($event) {
                 return \Carbon\Carbon::parse($event->event_start)->format('d.m.Y');
