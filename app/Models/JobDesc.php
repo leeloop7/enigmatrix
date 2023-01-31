@@ -9,6 +9,6 @@ class JobDesc extends Model
 {
     public function events()
     {
-        return $this->hasMany(Event::class, 'job_desc_id');
+        return $this->hasMany(Event::class);
     }
 }

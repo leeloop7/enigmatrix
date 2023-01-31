@@ -38,16 +38,64 @@
                 <i class="fa-solid fa-chart-mixed mr-2"></i> Statistika - ure glede na projekt
             </h3>
             <div class="grid grid-cols-5 gap-8 my-4">
-                @foreach($groupedEventsProject as $id => $totalTime)
-                    <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">
-                        <span class="font-bold"></span>{{ $projects[$id]->name }}</span> <br>
-                        <span class="font-bold text-2xl">{{ $totalTime / 3600 }}</span>
-                    </div>
-                    <!-- $event->project->name  -->
-                    <!-- $event->customer->name  -->
-                    <!-- ...  -->
-                @endforeach
+            @foreach($groupedEventsProject as $id => $totalTime)
+                <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">
+                    <span class="font-bold"></span>{{ $projects[$id]->name }}</span> <br>
+                    <span class="font-bold text-2xl">{{ $totalTime / 3600 }}</span>
+                </div>
+            @endforeach
             </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto gap-5 my-12">
+            <table class="overflow-x-auto w-full text-sm text-white mb-24">
+                <thead class="bg-white bg-opacity-10 text-xs uppercase font-medium">
+                    <tr>
+                    <th scope="col" class="px-2 py-3 text-left tracking-wider">
+                        Datum
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-left tracking-wider">
+                        PRIHOD
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-left tracking-wider">
+                        ODHOD
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-left tracking-wider">
+                        SKUPAJ
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-left tracking-wider">
+                        VRSTA
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-left tracking-wider">
+                        PODROBNO
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-left tracking-wider">
+                        PROJEKT
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-left tracking-wider">
+                        STRANKA
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-left tracking-wider">
+                        OPIS
+                    </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($selectedUser->events->sortBy('event_start') as $event)
+                        <tr class="@if($loop->odd) bg-black bg-opacity-10 @endif hover:bg-white hover:bg-opacity-20">
+                            <td class="px-2">{{ Carbon::parse($event->event_start)->translatedFormat("d.m. l") }}</td>
+                            <td class="px-2">{{ Carbon::parse($event->event_start)->format("H:i") }}</td>
+                            <td class="px-2">{{ Carbon::parse($event->event_end)->format("H:i") }}</td>
+                            <td class="px-2">{{ Carbon::parse($event->event_difference)->format("H:i") }}</td>
+                            <td class="px-2">{{ $event->job->name }}</td>
+                            <td class="px-2">@if($event->job_desc_id != '0'){{ $event->jobDesc->name }}@endif</td>
+                            <td class="px-2">{{ $event->project->name }}</td>
+                            <td class="px-2">{{ $event->customer->name }}</td>
+                            <td class="px-2">{{ \Illuminate\Support\Str::limit($event->event_desc, 50, $end='...') }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     @endif
 </div>
