@@ -71,6 +71,7 @@ class DashboardController extends Controller
             ->where('job_id', '!=', '6')
             ->where('job_id', '!=', '7')
             ->where('job_id', '!=', '8')
+            ->where('job_id', '!=', '11')
             ->get()
             ->groupBy(function ($event) {
                 return \Carbon\Carbon::parse($event->event_start)->format('d.m.Y');

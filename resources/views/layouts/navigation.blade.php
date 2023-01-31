@@ -28,6 +28,12 @@
                       :active="request()->routeIs('statistics')">
             {{ __('Statistika') }}
           </x-nav-link>
+          @if(in_array(Auth::user()->email, config("admins")))
+          <x-nav-link :href="route('administration')"
+                      :active="request()->routeIs('administration')">
+            {{ __('Administracija') }}
+          </x-nav-link>
+          @endif
         </div>
       </div>
 
