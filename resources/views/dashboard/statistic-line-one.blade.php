@@ -1,4 +1,18 @@
-<h3 class="text-2xl font-medium leading-6 dark:text-gray-200 text-white"><i class="fa-solid fa-calendar-star mr-2"></i> Januar 2023</h3>
+
+<div class="flex items-center">
+    <a href="?year={{$currentDate->month === 1 ? $currentDate->year - 1 : $currentDate->year}}&month={{$currentDate->month === 1 ? 12 : $currentDate->month - 1}}" class="bg-white/10 shadow p-2 rounded">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-white">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+    </a>
+    <a href="?year={{$currentDate->month === 12 ? $currentDate->year + 1 : $currentDate->year}}&month={{$currentDate->month === 12 ? 1 : $currentDate->month + 1}}" class="bg-white/10 shadow p-2 rounded ml-2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-white">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+      </svg>
+    </a>
+    <h3 class="text-2xl font-medium leading-6 dark:text-gray-200 text-white ml-4"><i class="fa-solid fa-calendar-star mr-2"></i>{{ $currentDate->format("M") }} {{ $currentDate->year }}</h3>
+</div>
+
     <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-4">
       <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">
         <div class="flex flex-wrap">

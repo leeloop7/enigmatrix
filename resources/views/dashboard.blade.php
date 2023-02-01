@@ -2,8 +2,9 @@
 
   <!-- Statistic line one -->
   <div class="max-w-7xl mx-auto p-8">
-    @include('dashboard.statistic-line-one')
+    @include('dashboard.statistic-line-one', ["currentDate" => $currentDate])
   </div>
+
 
 
   <div class="max-w-7xl mx-auto px-8 gap-5" x-data="{ currentDate: null }">

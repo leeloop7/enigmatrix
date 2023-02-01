@@ -8,13 +8,14 @@ use App\Models\Event;
 use App\Models\Job;
 use App\Models\Project;
 use App\Models\JobDesc;
+use Illuminate\Http\Request;
 
 use Carbon\Carbon;
 
 
 class DashboardController extends Controller
 {
-    public function numbers()
+    public function numbers(Request $request)
     {
 
 
@@ -34,12 +35,21 @@ class DashboardController extends Controller
         $timeOffs = Auth::user()->events()->whereEventTheme('5')->count();
         $sickDays = Auth::user()->events()->whereEventTheme('6')->count();
 
+        $currentDate = today();
+
+        if($request->has('year')) {
+            $currentDate->setYear($request->get('year'));
+        }
+
+        if($request->has('month')) {
+            $currentDate->setMonth($request->get('month'));
+        }
+
         // CALENDAR
-        $today = today();
         $dates = [];
 
-        for ($i = 0; $i < $today->daysInMonth; ++$i) {
-            $date = Carbon::createFromDate($today->year, $today->month, $i + 1)->format('d.m.Y');
+        for ($i = 0; $i < $currentDate->daysInMonth; ++$i) {
+            $date = Carbon::createFromDate($currentDate->year, $currentDate->month, $i + 1)->format('d.m.Y');
             $dates[$date] = [];
         }
 
@@ -96,9 +106,9 @@ class DashboardController extends Controller
 
         $overHours = $allHours - ($allDays * 8);
 
-
         //VIEW
         return view('dashboard')
+            ->with('currentDate', $currentDate)
             ->with('timeOffs', $timeOffs)
             ->with('sickDays', $sickDays)
             ->with('totalWorkingDays', $totalWorkingDays)
