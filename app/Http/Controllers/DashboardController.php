@@ -31,9 +31,7 @@ class DashboardController extends Controller
         // EVENT DESC JOB
         $jobDescriptions = JobDesc::all()->sortBy('name');
 
-        // EVENT CALCULATIONS
-        $timeOffs = Auth::user()->events()->whereEventTheme('5')->count();
-        $sickDays = Auth::user()->events()->whereEventTheme('6')->count();
+
 
         $currentDate = today();
 
@@ -44,6 +42,18 @@ class DashboardController extends Controller
         if($request->has('month')) {
             $currentDate->setMonth($request->get('month'));
         }
+
+         // EVENT CALCULATIONS
+         $timeOffs = Auth::user()->events()
+         ->whereEventTheme('5')
+         ->whereYear('event_start', '=', $currentDate->year)
+         ->whereMonth('event_start', '=', $currentDate->month)
+         ->count();
+         $sickDays = Auth::user()->events()
+         ->whereEventTheme('6')
+         ->whereYear('event_start', '=', $currentDate->year)
+         ->whereMonth('event_start', '=', $currentDate->month)
+         ->count();
 
         // CALENDAR
         $dates = [];
@@ -63,11 +73,12 @@ class DashboardController extends Controller
             if (isset($dates[$startTime->format('d.m.Y')])) {
                 array_push($dates[$startTime->format('d.m.Y')], $event);
             }
-            if ($event->event_theme != '5' and $event->event_theme != '6') {
+            if ($event->event_theme != '5' and $event->event_theme != '6' and $event->event_theme != '7' and $event->event_theme != '8' and $event->event_theme != '11') {
                 $difference = $event->event_difference;
                 $workingSeconds += $difference;
             }
         }
+
 
         $timeOffsSeconds = $timeOffs * 28800;
         $sickDaysSeconds = $sickDays * 28800;
@@ -82,6 +93,8 @@ class DashboardController extends Controller
             ->where('job_id', '!=', '7')
             ->where('job_id', '!=', '8')
             ->where('job_id', '!=', '11')
+            ->whereYear('event_start', '=', $currentDate->year)
+            ->whereMonth('event_start', '=', $currentDate->month)
             ->get()
             ->groupBy(function ($event) {
                 return \Carbon\Carbon::parse($event->event_start)->format('d.m.Y');
@@ -104,8 +117,6 @@ class DashboardController extends Controller
         }
 
 
-        $overHours = $allHours - ($allDays * 8);
-
         //VIEW
         return view('dashboard')
             ->with('currentDate', $currentDate)
@@ -123,7 +134,6 @@ class DashboardController extends Controller
             ->with('difference', $difference)
             ->with('jobs', $jobs)
             ->with('projects', $projects)
-            ->with('overHours', $overHours)
             ->with('customers', $customers)
             ->with('jobDescriptions', $jobDescriptions)
             ->with('dates', $dates);
