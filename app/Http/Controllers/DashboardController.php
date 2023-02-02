@@ -43,17 +43,17 @@ class DashboardController extends Controller
             $currentDate->setMonth($request->get('month'));
         }
 
-         // EVENT CALCULATIONS
-         $timeOffs = Auth::user()->events()
-         ->whereEventTheme('5')
-         ->whereYear('event_start', '=', $currentDate->year)
-         ->whereMonth('event_start', '=', $currentDate->month)
-         ->count();
-         $sickDays = Auth::user()->events()
-         ->whereEventTheme('6')
-         ->whereYear('event_start', '=', $currentDate->year)
-         ->whereMonth('event_start', '=', $currentDate->month)
-         ->count();
+        // EVENT CALCULATIONS
+        $timeOffs = Auth::user()->events()
+        ->whereEventTheme('5')
+        ->whereYear('event_start', '=', $currentDate->year)
+        ->whereMonth('event_start', '=', $currentDate->month)
+        ->count();
+        $sickDays = Auth::user()->events()
+        ->whereEventTheme('6')
+        ->whereYear('event_start', '=', $currentDate->year)
+        ->whereMonth('event_start', '=', $currentDate->month)
+        ->count();
 
         // CALENDAR
         $dates = [];
@@ -86,6 +86,8 @@ class DashboardController extends Controller
         $allHours = ($workingSeconds + $timeOffsSeconds + $sickDaysSeconds) / 3600;
 
 
+
+
         $workingDays = Auth::user()->events()
             ->select(['event_start', 'job_id'])
             ->where('job_id', '!=', '5')
@@ -102,6 +104,7 @@ class DashboardController extends Controller
             ->map(function ($workingDays) {
                 return $workingDays->count();
             });
+
 
         $totalWorkingDays = $workingDays->count();
         $allDays = $totalWorkingDays + $timeOffs + $sickDays;
