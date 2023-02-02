@@ -54,6 +54,11 @@ class DashboardController extends Controller
         ->whereYear('event_start', '=', $currentDate->year)
         ->whereMonth('event_start', '=', $currentDate->month)
         ->count();
+        $kidsDays = Auth::user()->events()
+        ->whereEventTheme('7')
+        ->whereYear('event_start', '=', $currentDate->year)
+        ->whereMonth('event_start', '=', $currentDate->month)
+        ->count();
 
         // CALENDAR
         $dates = [];
@@ -82,6 +87,7 @@ class DashboardController extends Controller
 
         $timeOffsSeconds = $timeOffs * 28800;
         $sickDaysSeconds = $sickDays * 28800;
+        $kidsDaysSeconds = $kidsDays * 28800;
 
         $allHours = ($workingSeconds + $timeOffsSeconds + $sickDaysSeconds) / 3600;
 
@@ -107,16 +113,18 @@ class DashboardController extends Controller
 
 
         $totalWorkingDays = $workingDays->count();
-        $allDays = $totalWorkingDays + $timeOffs + $sickDays;
+        $allDays = $totalWorkingDays + $timeOffs + $sickDays + $kidsDays;
 
         if ($allDays != 0) {
             $sickDaysProcents = ($sickDays / $allDays) * 100;
             $totalWorkingDaysProcents = ($totalWorkingDays / $allDays) * 100;
             $timeOffsProcents = ($timeOffs / $allDays) * 100;
+            $kidsDaysProcents = ($sickDays / $allDays) * 100;
         } else {
             $sickDaysProcents = 0;
             $totalWorkingDaysProcents = 0;
             $timeOffsProcents = 0;
+            $kidsDaysProcents = 0;
         }
 
 
@@ -125,11 +133,14 @@ class DashboardController extends Controller
             ->with('currentDate', $currentDate)
             ->with('timeOffs', $timeOffs)
             ->with('sickDays', $sickDays)
+            ->with('kidsDays', $kidsDays)
             ->with('totalWorkingDays', $totalWorkingDays)
             ->with('workingSeconds', $workingSeconds)
             ->with('timeOffsSeconds', $timeOffsSeconds)
             ->with('sickDaysSeconds', $sickDaysSeconds)
             ->with('sickDaysProcents', $sickDaysProcents)
+            ->with('kidsDaysSeconds', $kidsDaysSeconds)
+            ->with('kidsDaysProcents', $kidsDaysProcents)
             ->with('totalWorkingDaysProcents', $totalWorkingDaysProcents)
             ->with('timeOffsProcents', $timeOffsProcents)
             ->with('allHours', $allHours)
