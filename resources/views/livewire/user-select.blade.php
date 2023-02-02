@@ -16,6 +16,7 @@
             <!-- $selectedUser->name -->
             Št. dni dopusta: <b>{{ $timeOffs }}</b> <br>
             Št. dni bolniške: <b>{{ $sickDays }}</b> <br>
+            Št. dni nege: <b>{{ $kidsDays }}</b> <br>
             Št. dni praznikov: <b>{{ $holidays }}</b> <br>
             Št. delovnih dni: <b>{{ $totalWorkingDays }}</b><br>
             Št. delovnih ur (zapisano): <br>

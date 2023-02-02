@@ -12,6 +12,7 @@ class UserSelect extends Component
     public $selectedUser;
     public $timeOffs;
     public $sickDays;
+    public $kidsDays;
     public $workingDays;
     public $totalWorkingDays;
     public $holidays;
@@ -29,6 +30,7 @@ class UserSelect extends Component
         $this->selectedUser = $value ? User::findOrFail($value) : null;
         $this->timeOffs =  $this->selectedUser->events()->whereEventTheme('5')->count();
         $this->sickDays =  $this->selectedUser->events()->whereEventTheme('6')->count();
+        $this->kidsDays =  $this->selectedUser->events()->whereEventTheme('7')->count();
         $this->holidays =  $this->selectedUser->events()->whereEventTheme('11')->count();
         $workingDays = $this->selectedUser->events()
             ->select(['event_start', 'job_id'])
