@@ -31,10 +31,11 @@ class UserSelect extends Component
         $this->timeOffs =  $this->selectedUser->events()->whereEventTheme('5')->count();
         $this->sickDays =  $this->selectedUser->events()->whereEventTheme('6')->count();
         $this->kidsDays =  $this->selectedUser->events()->whereEventTheme('7')->count();
-        $this->holidays =  $this->selectedUser->events()->whereEventTheme('11')->count();
+        $this->holidays =  $this->selectedUser->events()->whereEventTheme('12')->count();
+
         $workingDays = $this->selectedUser->events()
             ->select(['event_start', 'job_id'])
-            ->whereNotIn('job_id', [5, 6, 7, 8, 11])
+            ->whereNotIn('job_id', [5, 6, 7, 8, 12])
             ->get()
             ->groupBy(function ($event) {
                 return \Carbon\Carbon::parse($event->event_start)->format('d.m.Y');
