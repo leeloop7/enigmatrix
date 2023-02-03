@@ -72,7 +72,7 @@ class DashboardController extends Controller
         $difference = 0;
 
         $workingEvents = Auth::user()->events()
-                            ->whereNotIn('event_theme', [5, 6, 7, 8, 11])
+                            ->whereNotIn('event_theme', [5, 6, 7, 8, 11, 12])
                             ->whereYear('event_start', '=', $currentDate->year)
                             ->whereMonth('event_start', '=', $currentDate->month)
                             ->get();
