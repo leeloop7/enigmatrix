@@ -5,6 +5,7 @@ use App\Models\Customer;
 use App\Models\Project;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class UserSelect extends Component
 {
@@ -18,6 +19,7 @@ class UserSelect extends Component
     public $holidays;
     public $groupedEvents;
     public $groupedEventsProjects;
+    public $workingMinutes;
 
 
     public function render()
@@ -51,6 +53,23 @@ class UserSelect extends Component
         ->map(fn($events) => $events->sum("event_difference"));
 
         $this->totalWorkingDays = $workingDays->count();
+
+        $sum = 0;
+        $duration = 0;
+        $difference = 0;
+        $workingMinutes = 0;
+        foreach ($this->selectedUser->events as $event) {
+            $startTime = Carbon::parse($event->event_start);
+            $sum += $duration;
+            if (isset($dates[$startTime->format('d.m.Y')])) {
+                array_push($dates[$startTime->format('d.m.Y')], $event);
+            }
+            if ($event->event_theme != '5' and $event->event_theme != '6' and $event->event_theme != '7' and $event->event_theme != '8' and $event->event_theme != '11') {
+                $difference = $event->event_difference;
+                $workingMinutes += $difference;
+            }
+        }
+
 
     }
 

@@ -19,7 +19,7 @@
             Št. dni nege: <b>{{ $kidsDays }}</b> <br>
             Št. dni praznikov: <b>{{ $holidays }}</b> <br>
             Št. delovnih dni: <b>{{ $totalWorkingDays }}</b><br>
-            Št. delovnih ur (zapisano): <br>
+            Št. delovnih ur (zapisano): <b>{{ $workingMinutes / 3600 }}</b> <br>
             Št. delovnih ur (del. dni * 8): <b>{{ $totalWorkingDays * 8 }}</b> <br>
             <h3 class="text-2xl font-medium leading-6 dark:text-gray-200 text-white mt-12">
                 <i class="fa-solid fa-chart-mixed mr-2"></i> Statistika - ure glede na stranko

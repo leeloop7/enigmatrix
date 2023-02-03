@@ -69,18 +69,21 @@ class DashboardController extends Controller
         }
 
         $sum = 0;
-        $duration = 0;
         $difference = 0;
-        $workingSeconds = 0;
+
+        $workingEvents = Auth::user()->events()
+                            ->whereNotIn('event_theme', [5, 6, 7, 8, 11])
+                            ->whereYear('event_start', '=', $currentDate->year)
+                            ->whereMonth('event_start', '=', $currentDate->month)
+                            ->get();
+        $workingSeconds = $workingEvents->reduce(function ($total, $event) {
+            return $total + $event->event_difference;
+        }, 0);
+
         foreach (Auth::user()->events as $event) {
             $startTime = Carbon::parse($event->event_start);
-            $sum += $duration;
             if (isset($dates[$startTime->format('d.m.Y')])) {
                 array_push($dates[$startTime->format('d.m.Y')], $event);
-            }
-            if ($event->event_theme != '5' and $event->event_theme != '6' and $event->event_theme != '7' and $event->event_theme != '8' and $event->event_theme != '11') {
-                $difference = $event->event_difference;
-                $workingSeconds += $difference;
             }
         }
 
@@ -90,9 +93,6 @@ class DashboardController extends Controller
         $kidsDaysSeconds = $kidsDays * 28800;
 
         $allHours = ($workingSeconds + $timeOffsSeconds + $sickDaysSeconds) / 3600;
-
-
-
 
         $workingDays = Auth::user()->events()
             ->select(['event_start', 'job_id'])

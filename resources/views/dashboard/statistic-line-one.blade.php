@@ -18,7 +18,7 @@
         <div class="flex flex-wrap">
             <div class="relative w-full pr-4 max-w-full flex-grow flex-1 truncate text-xs font-black uppercase text-white">
                 Ure skupaj
-                <dd class="mt-1 text-2xl font-bold tracking-tight text-white">{{ $totalWorkingDays*8 }}</dd>
+                <dd class="mt-1 text-2xl font-bold tracking-tight text-white">{{ $workingSeconds / 3600 }}</dd>
             </div>
             <div class="relative w-auto pl-4 flex-initial">
                 <div class="text-white p-2 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-pink-600">
