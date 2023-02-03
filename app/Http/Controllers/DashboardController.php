@@ -59,6 +59,11 @@ class DashboardController extends Controller
         ->whereYear('event_start', '=', $currentDate->year)
         ->whereMonth('event_start', '=', $currentDate->month)
         ->count();
+        $holidays = Auth::user()->events()
+        ->whereEventTheme('12')
+        ->whereYear('event_start', '=', $currentDate->year)
+        ->whereMonth('event_start', '=', $currentDate->month)
+        ->count();
 
         // CALENDAR
         $dates = [];
@@ -91,6 +96,7 @@ class DashboardController extends Controller
         $timeOffsSeconds = $timeOffs * 28800;
         $sickDaysSeconds = $sickDays * 28800;
         $kidsDaysSeconds = $kidsDays * 28800;
+        $holidaysSeconds = $holidays * 28800;
 
         $allHours = ($workingSeconds + $timeOffsSeconds + $sickDaysSeconds) / 3600;
 
@@ -101,6 +107,7 @@ class DashboardController extends Controller
             ->where('job_id', '!=', '7')
             ->where('job_id', '!=', '8')
             ->where('job_id', '!=', '11')
+            ->where('job_id', '!=', '12')
             ->whereYear('event_start', '=', $currentDate->year)
             ->whereMonth('event_start', '=', $currentDate->month)
             ->get()
@@ -113,18 +120,20 @@ class DashboardController extends Controller
 
 
         $totalWorkingDays = $workingDays->count();
-        $allDays = $totalWorkingDays + $timeOffs + $sickDays + $kidsDays;
+        $allDays = $totalWorkingDays + $timeOffs + $sickDays + $kidsDays + $holidays;
 
         if ($allDays != 0) {
             $sickDaysProcents = ($sickDays / $allDays) * 100;
             $totalWorkingDaysProcents = ($totalWorkingDays / $allDays) * 100;
             $timeOffsProcents = ($timeOffs / $allDays) * 100;
             $kidsDaysProcents = ($sickDays / $allDays) * 100;
+            $holidaysProcents = ($holidays / $allDays) * 100;
         } else {
             $sickDaysProcents = 0;
             $totalWorkingDaysProcents = 0;
             $timeOffsProcents = 0;
             $kidsDaysProcents = 0;
+            $holidaysProcents = 0;
         }
 
 
@@ -134,6 +143,7 @@ class DashboardController extends Controller
             ->with('timeOffs', $timeOffs)
             ->with('sickDays', $sickDays)
             ->with('kidsDays', $kidsDays)
+            ->with('holidays', $holidays)
             ->with('totalWorkingDays', $totalWorkingDays)
             ->with('workingSeconds', $workingSeconds)
             ->with('timeOffsSeconds', $timeOffsSeconds)
@@ -141,6 +151,8 @@ class DashboardController extends Controller
             ->with('sickDaysProcents', $sickDaysProcents)
             ->with('kidsDaysSeconds', $kidsDaysSeconds)
             ->with('kidsDaysProcents', $kidsDaysProcents)
+            ->with('holidaysSeconds', $holidaysSeconds)
+            ->with('holidaysProcents', $holidaysProcents)
             ->with('totalWorkingDaysProcents', $totalWorkingDaysProcents)
             ->with('timeOffsProcents', $timeOffsProcents)
             ->with('allHours', $allHours)
