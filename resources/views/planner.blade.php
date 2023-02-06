@@ -42,3 +42,7 @@
 
     </main>
 </x-app-layout>
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script>
+    $( "div.scrollbar" ).scrollLeft( {{$diff}} * 12 );
+</script>

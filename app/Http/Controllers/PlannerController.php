@@ -27,10 +27,15 @@ class PlannerController extends Controller
             }
         }
 
+        $date = "2023-01-01 01:00:00";
+
+        $diff = now()->diffInDays(Carbon::parse($date));
+
         $projects = Project::all();
 
         return view('planner')
             ->with('projects', $projects)
+            ->with('diff', $diff)
             ->with('calendar', $calendar)
             ->with('months', $months);
     }
