@@ -11,4 +11,5 @@ class JobDesc extends Model
     {
         return $this->hasMany(Event::class);
     }
+
 }

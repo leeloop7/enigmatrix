@@ -6,7 +6,6 @@
   </div>
 
 
-
   <div class="max-w-7xl mx-auto px-8 gap-5" x-data="{ currentDate: null }">
     <div class="fixed inset-0 z-30 flex items-center justify-center overflow-auto bg-white bg-opacity-10" x-show="!!currentDate" x-cloak>
         @include('dashboard.create-event')
