@@ -10,6 +10,17 @@
             </select>
         </div>
     </div>
+    <div class="form-group row">
+        <label class="text-white font-bold mt-4" for="user_id">Izberi mesec</label><br>
+        <div class="col-md-6">
+            <select @if(!$selectedUser) disabled @endif wire:model="selectedDate" name="selected_date" class="block appearance-none bg-transparent w-full sm:w-1/3 border-gray-400 px-4 py-1 pl-2 pr-8 mt-1 mb-4 rounded-lg text-gray-100 text-sm">
+                <option value="">Izberi mesec</option>
+                @foreach($possibleDates as $date)
+                    <option class="bg-gray-700 capitalize" value="{{ $date }}">{{ Carbon::parse($date)->translatedFormat("M Y") }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
     @if($selectedUser)
 
         <div class="text-white">
@@ -82,7 +93,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($selectedUser->events->sortBy('event_start') as $event)
+                    @foreach($events->sortBy('event_start') as $event)
                         <tr class="@if($loop->odd) bg-black bg-opacity-10 @endif hover:bg-white hover:bg-opacity-20">
                             <td class="px-2">{{ Carbon::parse($event->event_start)->translatedFormat("d.m. l") }}</td>
                             <td class="px-2">{{ Carbon::parse($event->event_start)->format("H:i") }}</td>

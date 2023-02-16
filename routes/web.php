@@ -7,7 +7,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\PlannerController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\AdministrationController;
-use App\Http\Controllers\EventExportController;
+use App\Http\Controllers\ExcelController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -30,7 +30,8 @@ Route::get('/', [DashboardController::class, 'numbers'])->middleware(['auth', 'v
 Route::get('/planner', [PlannerController::class, 'plans'])->middleware(['auth', 'verified'])->name('planner');
 Route::get('/statistics', [StatisticsController::class, 'statistics'])->middleware(['auth', 'verified'])->name('statistics');
 Route::get('/administration', [AdministrationController::class, 'administration'])->middleware(['auth', 'verified', 'admin'])->name('administration');
-Route::get('/events/export', 'App\Http\Controllers\EventExportController@export');
+
+Route::get('/preview-events', 'App\Http\Controllers\ExcelController@previewEvents')->name('preview-events');
 
 
 

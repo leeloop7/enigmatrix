@@ -29,4 +29,12 @@ class Event extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function scopeInSelectedMonth($query, $currentDate) {
+        if ($currentDate) {
+            $date = Carbon::parse($currentDate);
+            return $query->whereYear('event_start', '=', $date->year)->whereMonth('event_start', '=', $date->month);
+        }
+        return $query;
+    }
 }

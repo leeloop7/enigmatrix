@@ -31,8 +31,6 @@ class DashboardController extends Controller
         // EVENT DESC JOB
         $jobDescriptions = JobDesc::all()->sortBy('name');
 
-
-
         $currentDate = today();
 
         if($request->has('year')) {
