@@ -20,6 +20,7 @@ class UserFilter extends Component
     public $groupedEvents;
     public $groupedEventsProjects;
     public $workingMinutes;
+    public $workingSeconds;
     public $selectedDate = "";
     public $possibleDates = [];
     public $events;
@@ -69,6 +70,14 @@ class UserFilter extends Component
             ->map(function ($workingDays) {
                 return $workingDays->count();
         });
+
+        $currentDate = today();
+        $workingEvents = $this->selectedUser->events()->inSelectedMonth($this->selectedDate)
+                            ->whereNotIn('job_id', [5, 6, 7, 8, 11, 12])
+                            ->get();
+        $this->workingSeconds = $workingEvents->reduce(function ($total, $event) {
+            return $total + $event->event_difference;
+        }, 0);
 
         $this->groupedEvents = $this->events->groupBy("customer_id")
             ->map(fn($events) => $events->sum("event_difference"));
