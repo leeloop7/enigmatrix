@@ -26,10 +26,7 @@ class AdministrationController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'location' => 'required|string|max:255',
-            'montage_start' => 'required|date',
-            'montage_end' => 'required|date',
-            'demontage_start' => 'required|date',
-            'demontage_end' => 'required|date',
+            'position' => 'required|int',
             'customers' => 'required|array',
         ]);
 
@@ -38,6 +35,7 @@ class AdministrationController extends Controller
         $project->start_date = $request->start_date;
         $project->end_date = $request->end_date;
         $project->location = $request->location;
+        $project->position = $request->position;
         $project->montage_start = $request->montage_start;
         $project->montage_end = $request->montage_end;
         $project->demontage_start = $request->demontage_start;

@@ -35,29 +35,34 @@
             </div>
 
             <div class="mb-4">
+                <label for="position" class="block text-gray-700 font-bold mb-2">Position:</label>
+                <input type="text" name="position" id="position" class="form-input" required>
+            </div>
+
+            <div class="mb-4">
                 <label for="montage_start" class="block text-gray-700 font-bold mb-2">Montage Start:</label>
-                <input type="datetime-local" name="montage_start" id="montage_start" class="form-input" required>
+                <input type="datetime-local" name="montage_start" id="montage_start" class="form-input" >
             </div>
 
             <div class="mb-4">
                 <label for="montage_end" class="block text-gray-700 font-bold mb-2">Montage End:</label>
-                <input type="datetime-local" name="montage_end" id="montage_end" class="form-input" required>
+                <input type="datetime-local" name="montage_end" id="montage_end" class="form-input" >
             </div>
 
             <div class="mb-4">
                 <label for="demontage_start" class="block text-gray-700 font-bold mb-2">Demontage Start:</label>
-                <input type="datetime-local" name="demontage_start" id="demontage_start" class="form-input" required>
+                <input type="datetime-local" name="demontage_start" id="demontage_start" class="form-input" >
             </div>
 
             <div class="mb-4">
                 <label for="demontage_end" class="block text-gray-700 font-bold mb-2">Demontage End:</label>
-                <input type="datetime-local" name="demontage_end" id="demontage_end" class="form-input" required>
+                <input type="datetime-local" name="demontage_end" id="demontage_end" class="form-input" >
             </div>
 
-            <div class="form-group">
+            <div class="form-group w-64">
                 <label for="customers">Customers</label>
                 <br>
-                <select id="customers" class="form-control" name="customers[]" multiple>
+                <select id="customers" class="form-control w-64" name="customers[]" multiple>
                     @foreach($customers as $customer)
                         <option value="{{ $customer->id }}">{{ $customer->name }}</option>
                     @endforeach
