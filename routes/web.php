@@ -33,6 +33,9 @@ Route::get('/administration', [AdministrationController::class, 'administration'
 
 Route::get('/preview-events', 'App\Http\Controllers\ExcelController@previewEvents')->name('preview-events');
 
+Route::post('/administration', [AdministrationController::class, 'storeProject'])->middleware(['auth', 'verified', 'admin'])->name('projects.store');
+Route::post('/administration/store-customer', [AdministrationController::class, 'storeCustomer'])->middleware(['auth', 'verified', 'admin'])->name('customers.store');
+
 
 
 Route::get('dropdowns', Dropdowns::class);
