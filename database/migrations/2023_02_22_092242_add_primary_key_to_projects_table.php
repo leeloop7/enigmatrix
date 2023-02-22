@@ -12,11 +12,11 @@ return new class extends Migration
      * @return void
      */
     public function up()
-{
-    Schema::table('projects', function (Blueprint $table) {
-        $table->id()->first();
-    });
-}
+    {
+        Schema::table('customer_project', function (Blueprint $table) {
+            $table->primary('id', 'id');
+        });
+    }
 
     /**
      * Reverse the migrations.
