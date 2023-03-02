@@ -16,10 +16,10 @@
               Datum
             </th>
             <th scope="col" class="px-4 py-3 text-left tracking-wider">
-              PRIHOD
+              ZAČETEK
             </th>
             <th scope="col" class="px-4 py-3 text-left tracking-wider">
-              ODHOD
+              KONEC
             </th>
             <th scope="col" class="px-4 py-3 text-left tracking-wider">
               SKUPAJ
