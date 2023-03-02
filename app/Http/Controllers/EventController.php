@@ -50,7 +50,14 @@ class EventController extends Controller
         $event->event_end = $event_end;
         $event->event_theme = $event_theme;
         if ($event->event_theme != '5' and $event->event_theme != '6') {
-            $event->event_difference = Carbon::parse($event->event_end)->diffInSeconds(Carbon::parse($event->event_start));
+            $start = Carbon::parse($event->event_start);
+            $end = Carbon::parse($event->event_end);
+            if ($end->format('H:i:s') === '00:00:00') {
+                // if end time is 00:00:00, set it to 24:00:00 of the same day
+                $end->setTime(24, 0, 0);
+            }
+            $event->event_difference = $end->diffInSeconds($start);
+
         } else {
             $event->event_difference = '28800';
         };
@@ -67,21 +74,39 @@ class EventController extends Controller
         return redirect()->back()->with('success', 'Dogodek izbrisan!');
     }
 
-    public function edit($event) {
-
+    public function edit(Event $event)
+    {
         $jobs = Job::all();
-        // EVENT ALL PROJECTS
-        $projects = Project::all();
-        // EVENT DESC CUSTOMER
         $customers = Customer::all();
-        // EVENT DESC JOB
-        $jobDescriptions = JobDesc::all();
+        $job_descs = JobDesc::all();
+        $projects = Project::all();
 
-        $event = Event::find($event);
-        return view ('dashboard.edit-event',compact('event','jobs','customers','projects','jobDescriptions'));
+        return view('dashboard.edit-event', compact('event', 'jobs', 'customers', 'job_descs', 'projects'));
     }
 
-    public function update(Request $req,$event) {
-        $input = request->all();
+    public function update(Request $request, Event $event)
+    {
+
+        $oldEventStart = $event->event_start;
+        $oldEventStartDate = \Carbon\Carbon::parse($oldEventStart)->toDateString();
+
+        $event->job_id = $request->job_id;
+        $event->job_desc_id = $request->job_desc_id;
+        $event->project_id = $request->project_id;
+        $event->customer_id = $request->customer_id;
+        $event->event_desc = $request->event_description;
+        $eventStart = Carbon::createFromFormat('Y-m-d H:i:s', $oldEventStartDate.' '.$request->event_hours_start.':'.$request->event_minutes_start.':00');
+        $event->event_start = $eventStart;
+        $eventEnd = Carbon::createFromFormat('Y-m-d H:i:s', $oldEventStartDate.' '.$request->event_hours_end.':'.$request->event_minutes_end.':00');
+        $event->event_end = $eventEnd;
+
+        $eventDifference = $eventEnd->diffInSeconds($eventStart);
+        $event->event_difference = $eventDifference;
+
+        $event->save();
+
+        return redirect()->route('home');
+
     }
+
 }

@@ -33,6 +33,7 @@ class PlannerController extends Controller
 
         $projects = Project::all();
 
+
         return view('planner')
             ->with('projects', $projects)
             ->with('diff', $diff)

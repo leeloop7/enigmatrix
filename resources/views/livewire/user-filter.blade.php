@@ -22,7 +22,6 @@
         </div>
     </div>
     @if($selectedUser)
-
         <div class="text-white">
             <!-- $selectedUser->name -->
             Št. dni dopusta: <b>{{ $timeOffs }}</b> <br>

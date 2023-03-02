@@ -50,8 +50,8 @@ Route::middleware('auth')->group(function () {
 
 
 Route::post('/events', [EventController::class, 'store'])->middleware(['auth', 'verified']);
-Route::get('/events/edit/{event}', [EventController::class, 'edit'])->middleware(['auth', 'verified']);
-Route::put('/events/edit/{event}', [EventController::class, 'update'])->middleware(['auth', 'verified']);
+Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
 Route::delete('/events/{event}', [EventController::class, 'destroy'])->middleware(['auth', 'verified']);
 
 

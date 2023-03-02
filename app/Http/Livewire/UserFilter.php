@@ -18,6 +18,7 @@ class UserFilter extends Component
     public $totalWorkingDays;
     public $holidays;
     public $groupedEvents;
+    public $groupedEventsAdmin;
     public $groupedEventsProjects;
     public $workingMinutes;
     public $workingSeconds;
@@ -84,6 +85,8 @@ class UserFilter extends Component
 
         $this->groupedEventsProject = $this->events->groupBy("project_id")
         ->map(fn($events) => $events->sum("event_difference"));
+
+
 
         $this->totalWorkingDays = $workingDays->count();
 

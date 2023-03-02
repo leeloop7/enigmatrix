@@ -99,7 +99,7 @@ class DashboardController extends Controller
         $allHours = ($workingSeconds + $timeOffsSeconds + $sickDaysSeconds) / 3600;
 
         $workingDays = Auth::user()->events()
-            ->select(['event_start', 'job_id'])
+            ->select(['event_start', 'job_id', 'event_end'])
             ->where('job_id', '!=', '5')
             ->where('job_id', '!=', '6')
             ->where('job_id', '!=', '7')
@@ -112,12 +112,20 @@ class DashboardController extends Controller
             ->groupBy(function ($event) {
                 return \Carbon\Carbon::parse($event->event_start)->format('d.m.Y');
             })
+            ->filter(function ($workingDays) {
+                $totalDifference = $workingDays->sum(function ($event) {
+                    return \Carbon\Carbon::parse($event->event_start)->diffInSeconds(\Carbon\Carbon::parse($event->event_end));
+                });
+
+                return $totalDifference >= 14400;
+            })
             ->map(function ($workingDays) {
                 return $workingDays->count();
             });
 
-
         $totalWorkingDays = $workingDays->count();
+
+
         $allDays = $totalWorkingDays + $timeOffs + $sickDays + $kidsDays + $holidays;
 
         if ($allDays != 0) {
