@@ -78,12 +78,13 @@ class DashboardController extends Controller
                             ->whereNotIn('event_theme', [5, 6, 7, 8, 11, 12])
                             ->whereYear('event_start', '=', $currentDate->year)
                             ->whereMonth('event_start', '=', $currentDate->month)
+                            ->orderBy('event_start')
                             ->get();
         $workingSeconds = $workingEvents->reduce(function ($total, $event) {
             return $total + $event->event_difference;
         }, 0);
 
-        foreach (Auth::user()->events as $event) {
+        foreach (Auth::user()->events()->orderBy('event_start')->get() as $event) {
             $startTime = Carbon::parse($event->event_start);
             if (isset($dates[$startTime->format('d.m.Y')])) {
                 array_push($dates[$startTime->format('d.m.Y')], $event);
