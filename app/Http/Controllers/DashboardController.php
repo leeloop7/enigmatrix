@@ -8,6 +8,8 @@ use App\Models\Event;
 use App\Models\Job;
 use App\Models\Project;
 use App\Models\JobDesc;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
@@ -20,7 +22,7 @@ class DashboardController extends Controller
 
 
         // EVENT THEME
-        $jobs = Job::all();
+        $jobs = Job::orderBy('position')->get();
 
         // EVENT ALL PROJECTS
         $projects = Project::all();
@@ -28,8 +30,11 @@ class DashboardController extends Controller
         // EVENT DESC CUSTOMER
         $customers = Customer::all()->sortBy('name');
 
-        // EVENT DESC JOB
-        $jobDescriptions = JobDesc::all()->sortBy('name');
+        $user = Auth::user(); // get the current authenticated user
+
+        $jobDescriptions = JobDesc::whereHas('roles', function ($query) {
+            $query->whereIn('roles.id', Auth::user()->roles->pluck('id'));
+        })->get();
 
         $currentDate = today();
 

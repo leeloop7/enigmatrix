@@ -36,7 +36,7 @@ class EventController extends Controller
         if ($req->event_jobdesc != null) {
             $event_jobdesc = $req->event_jobdesc;
         } else {
-            $event_jobdesc = 0;
+            $event_jobdesc = 99;
         }
 
 
