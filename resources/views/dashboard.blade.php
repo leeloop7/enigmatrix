@@ -98,7 +98,7 @@
             </td>
           </tr>
           @empty
-          <tr class="@if($loop->odd) bg-black bg-opacity-10 @endif hover:bg-white hover:bg-opacity-20">
+          <tr @if(Carbon::parse($key)->isToday()) id="today" class="@if($loop->odd) bg-black bg-opacity-10 @endif hover:bg-white hover:bg-opacity-20">
             <td class="px-4 py-2 font-bold whitespace-nowrapm border-l-4 border-transparent @if(Carbon::parse($key)->isWeekend()) border-red-600 @endif">
                 {{ Carbon::parse($key)->translatedFormat("d.m. l") }}
             </td>
