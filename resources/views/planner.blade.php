@@ -1,5 +1,11 @@
   <x-app-layout>
     <div class="hidden w-8 w-16 w-24 w-32 w-40 w-48 w-56 w-64 w-72 w-80 w-88 w-96 mt-8 mt-24 mt-36 mt-40 mt-52 mt-56 mt-68 mt-72 mt-88 bg-blue-700 bg-gray-600 bg-gray-700 bg-yellow-600 bg-red-900 bg-green-500"></div>
+    {{-- <div class="max-w-7xl mx-auto px-8 py-6 mb-4"  x-data="{ 'showModal3': false, 'showModal2': false }">
+        @if(in_array(Auth::user()->email, config("admins")))
+            <button class="ml-0 flex bg-white bg-opacity-50 rounded-lg py-2 px-4 hover:bg-opacity-80 block items-center float-left" @click="showModal3 = true"><i class="fa-solid fa-file-chart-column text-2xl text-green-600 mr-2"></i> Dodaj poročilo</button>
+        @endif
+        @include('administration.modal3')
+    </div> --}}
     <main class="max-w-7xl px-8 mx-auto my-12 pb-12 mt-20">
         <div class="flex flex-nowrap overflow-x-auto scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100 scrollbar-thin border-gray-400 border divide-x">
             @foreach ($calendar as $key => $value)

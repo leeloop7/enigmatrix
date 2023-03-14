@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\PlannerController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\AdministrationController;
 use App\Http\Controllers\ExcelController;
 
@@ -27,9 +28,18 @@ use App\Http\Livewire\Dropdowns;
 
 
 Route::get('/', [DashboardController::class, 'numbers'])->middleware(['auth', 'verified'])->name('home');
+
 Route::get('/planner', [PlannerController::class, 'plans'])->middleware(['auth', 'verified'])->name('planner');
+
 Route::get('/statistics', [StatisticsController::class, 'statistics'])->middleware(['auth', 'verified'])->name('statistics');
+
+
+Route::get('/suggestion', [SuggestionController::class, 'suggestion'])->middleware(['auth', 'verified'])->name('suggestion');
+Route::post('/suggestions', [SuggestionController::class, 'store'])->name('suggestions.store');
+
+
 Route::get('/administration', [AdministrationController::class, 'administration'])->middleware(['auth', 'verified', 'admin'])->name('administration');
+
 
 Route::get('/preview-events', 'App\Http\Controllers\ExcelController@previewEvents')->name('preview-events');
 

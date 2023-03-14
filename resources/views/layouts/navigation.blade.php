@@ -34,6 +34,10 @@
             {{ __('Administracija') }}
           </x-nav-link>
           @endif
+          <x-nav-link :href="route('suggestion')"
+                      :active="request()->routeIs('suggestion')">
+            {{ __('Predlog') }}
+          </x-nav-link>
         </div>
       </div>
 

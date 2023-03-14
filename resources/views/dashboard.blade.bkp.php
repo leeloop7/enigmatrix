@@ -1,135 +1,123 @@
 <x-app-layout>
 
-    <!-- Statistic line one -->
-    <div class="max-w-7xl mx-auto p-8">
-        @include('dashboard.statistic-line-one')
-    </div>
+  <!-- Statistic line one -->
+  <div class="max-w-7xl mx-auto p-8">
+    @include('dashboard.statistic-line-one', ["currentDate" => $currentDate])
+  </div>
 
-    <div class="max-w-7xl mx-auto grid grid-cols-3 px-8 gap-5">
-        <div class="bg-white rounded-md py-4 col-span-3 md:col-span-2">
-            <div class="px-4 mb-4 text-xl font-bold">Dnevna poročila</div>
-            <div class="bg-gray-50 text-gray-500 font-bold text-xs my-1 grid grid-cols-5 md:grid-cols-10 px-4 py-4 items-center">
-                <div>DATUM</div>
-                <div>PRIHOD</div>
-                <div>ODHOD</div>
-                <div class="hidden md:flex">SKUPAJ</div>
-                <div class="col-span-1 md:col-span-2">LOKACIJA</div>
-                <div class="col-span-3 hidden md:flex">OPIS DELA</div>
-                <div>UREJANJE</div>
-            </div>
 
-            @foreach ($dates as $key => $value)
-            <div x-data="{ 'showModal': false }" @keydown.escape="{ 'showModal': false }" class="
-                hover:bg-gray-300 text-gray-500 mb-1 grid grid-cols-5 md:grid-cols-10 text-xs px-4 py-1 items-center">
-                <div class="font-black">
-                    <span class="@if(\Carbon\Carbon::parse($key)->isWeekend()) bg-red-300 pl-1 py-1 @endif">{{ date("d.m.", strtotime($key)) }}</span>
-                </div>
-                @forelse ($value as $event)
-                @if ($loop->first)
+  <div class="max-w-7xl mx-auto px-8 gap-5" x-data="{ currentDate: null }">
+    <div class="fixed inset-0 z-30 flex items-center justify-center overflow-auto bg-white bg-opacity-10" x-show="!!currentDate" x-cloak>
+        @include('dashboard.create-event')
+      <table class="overflow-x-auto w-full text-sm text-white mb-24">
+        <thead class="bg-white bg-opacity-10 text-xs uppercase font-medium">
+          <tr>
+            <th scope="col" class="px-4 py-3 text-left tracking-wider">
+              Datum
+            </th>
+            <th scope="col" class="px-4 py-3 text-left tracking-wider">
+              ZAČETEK
+            </th>
+            <th scope="col" class="px-4 py-3 text-left tracking-wider">
+              KONEC
+            </th>
+            <th scope="col" class="px-4 py-3 text-left tracking-wider">
+              SKUPAJ
+            </th>
+            <th scope="col" class="px-4 py-3 text-left tracking-wider">
+              VRSTA
+            </th>
+            <th scope="col" class="px-4 py-3 text-left tracking-wider">
+              PROJEKT
+            </th>
+            <th scope="col" class="px-4 py-3 text-left tracking-wider">
+              STRANKA
+            </th>
+            <th scope="col" class="px-4 py-3 text-left tracking-wider">
+              OPIS
+            </th>
+            <th scope="col" class="px-4 py-3 text-left tracking-wider">
+              UREJANJE
+            </th>
+          </tr>
+        </thead>
 
-                @else
-                <div></div>
-                @endif
-                <div>
-                    @if($event->event_theme != '5' and $event->event_theme != '6')
-                    {{ date('H:i', strtotime($event->event_start)) }}
-                    @else
-                    00:00
-                    @endif
-                </div>
-                <div>
-                    @if($event->event_theme != '5' and $event->event_theme != '6')
-                    {{ date('H:i', strtotime($event->event_end)) }}
-                    @else
-                    00:00
-                    @endif
-                </div>
-                <div class="hidden md:flex">
-                    {{ date("H:i", $event->event_difference) }}
-                </div>
-                <div class="col-span-1 md:col-span-2"><i class="fas fa-circle text-xs @if($event->event_theme == '5')text-blue-500 @elseif($event->event_theme == '6') text-red-500 @else text-green-500 @endif mr-1"></i> <span class="hidden md:inline">{{ $event->job->name }}</span></div>
-                <div class="hidden md:flex col-span-2">
-                    {{ \Illuminate\Support\Str::limit($event->event_desc, 25, $end='...') }}
-                </div>
-                <div class="grid grid-cols-4 col-span-2">
-                    <div class=" mb-1 bg-blue-500 aspect-square w-6 text-center py-1 cursor-pointer hover:bg-blue-300 text-white"><i class="fa-solid fa-pen-to-square"></i></div>
-                    @if ($loop->first)
-                    <div class="bg-yellow-500 aspect-square w-6 text-center py-1 cursor-pointer hover:bg-yellow-300 text-white"><i class="fa-solid fa-info"></i></div>
-                    <div class="bg-green-500 aspect-square w-6 text-center py-1 cursor-pointer hover:bg-green-300 text-white"><i @click="showModal = true" class="fa-solid cursor-pointer fa-plus"></i></div>
-                    @endif
-                    <div class="bg-red-500 aspect-square w-6 text-center py-1 cursor-pointer hover:bg-red-300 text-white"><i class="fa-solid fa-xmark"></i></div>
-                </div>
-                @empty
-                <div></div>
-                <div></div>
-                <div class="hidden md:flex"></div>
-                <div class="col-span-2"></div>
-                <div class="col-span-2 hidden md:flex"></div>
-                <div class="bg-green-500 aspect-square w-6 text-center py-1 cursor-pointer hover:bg-green-300 text-white"><i @click="showModal = true" class="fa-solid fa-plus"></i></div>
-                @endforelse
+        <tbody class="bg-white bg-opacity-10">
+          @foreach ($dates as $key => $value)
 
-                <!-- Create event - Modal popup -->
-                @include('dashboard.create-event')
+          @forelse ($value as $event)
+          <tr class="@if($loop->parent->odd) bg-black bg-opacity-10 @endif hover:bg-white hover:bg-opacity-20 @if(Carbon::parse($key)->isToday()) bg-pink-500 bg-opacity-50 @endif">
+            @if ($loop->first)
+            <td class="px-4 py-2 font-bold whitespace-nowrapm border-l-4 border-transparent @if(Carbon::parse($key)->isWeekend()) border-red-600 @endif">
+                {{ Carbon::parse($key)->translatedFormat("d.m. l") }}
+            </td>
+            @else
+            <td></td>
+            @endif
+            <td class="px-4 py-2 whitespace-nowrap">
+              @if($event->event_theme != '5' and $event->event_theme != '6')
+                {{ Carbon::parse($event->event_start)->format("H:i") }}
+              @else
+              00:00
+              @endif
+            </td>
+            <td class="px-4 py-2 whitespace-nowrap">
+              @if($event->event_theme != '5' and $event->event_theme != '6')
+                {{ Carbon::parse($event->event_end)->format("H:i") }}
+              @else
+              00:00
+              @endif
+            </td>
+            <td class="px-4 py-2 whitespace-nowrap">
+              {{ date("H:i", $event->event_difference) }}
+            </td>
+            <td class="px-4 py-2 whitespace-nowrap">
+              <i class="fas fa-circle text-xs @if($event->event_theme == '5')text-blue-500 @elseif($event->event_theme == '6' or $event->event_theme == '7') text-teal-300 @else text-green-500 @endif mr-1"></i> <span class="hidden md:inline">{{ $event->job->name }}</span>
+            </td>
+            <td>
+                {{ $event->project->name }}
+              </td>
+            <td>
+              {{ $event->customer->name }}
+            </td>
+            <td class="px-4 py-2 whitespace-nowrap">
+              {{ \Illuminate\Support\Str::limit($event->event_desc, 25, $end='...') }}
+            </td>
+            <td class="px-4 py-2 grid grid-cols-4 whitespace-nowrap items-center">
+              <!-- <i class="fa-solid text-white fa-pen-to-square"></i> -->
+              @if ($loop->last)
+              <i @click="currentDate = '{{ $key }}'" class="fa-solid text-white hover:text-gray-900 cursor-pointer fa-plus"></i>
+              @endif
+              <form method="POST" action="/events/{{ $event->id }}">
+                @csrf
+                @method('DELETE')
+                <button onclick="return confirm('Ste prepričani, da želite izbrisati dogodek?')"><i class="fa-solid text-white hover:text-gray-900 fa-trash"></i></button>
+              </form>
+              <a href="{{ route('events.edit', $event->id) }}">Edit</a>
 
-            </div>
-            @endforeach
-        </div>
-        <div>
-            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <div class="flex flex-wrap">
-                    <div class="relative w-full pr-4 max-w-full flex-grow flex-1 truncate text-xs font-black uppercase text-gray-400">
-                        Nadure (za interne potrebe)
-                        <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">{{ $overHours }}</dd>
-                    </div>
-                    <div class="relative w-auto pl-4 flex-initial">
-                        <div class="text-white p-2 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-yellow-500">
-                            <i class="w-auto fa-solid fa-clock"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white px-4 rounded-md col-span-1 py-4 my-8">
-                <div class="px-4 mb-4 text-xl font-bold">Graf meseca</div>
-                <canvas id="myChart"></canvas>
-            </div>
-        </div>
-    </div>
+            </td>
+          </tr>
+          @empty
+          <tr class="@if($loop->odd) bg-black bg-opacity-10 @endif hover:bg-white hover:bg-opacity-20">
+            <td class="px-4 py-2 font-bold whitespace-nowrapm border-l-4 border-transparent @if(Carbon::parse($key)->isWeekend()) border-red-600 @endif">
+                {{ Carbon::parse($key)->translatedFormat("d.m. l") }}
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="px-4 py-2 grid grid-cols-4 whitespace-nowrap">
+              <i @click="currentDate = '{{ $key }}'" class="fa-solid text-white cursor-pointer fa-plus"></i>
+            </td>
+          </tr>
+          @endforelse
+          @endforeach
+        </tbody>
+      </table>
+  </div>
+
+
 </x-app-layout>
-
-<script>
-    const ctx = document.getElementById('myChart');
-
-    new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Delovnih dni', 'Dopust', 'Bolniška'],
-            datasets: [{
-                label: 'Število dni',
-                data: [{
-                    {
-                        $totalWorkingDays
-                    }
-                }, {
-                    {
-                        $timeOffs
-                    }
-                }, {
-                    {
-                        $sickDays
-                    }
-                }],
-                backgroundColor: [
-                    'rgb(37, 197, 95)',
-                    'rgb(60, 130, 246)',
-                    'rgb(240, 69, 69)'
-                ],
-                borderWidth: 3
-            }]
-        },
-        options: {
-            scales: {
-
-            }
-        }
-    });
-</script>
