@@ -14,7 +14,8 @@ class SuggestionController extends Controller
 {
     public function suggestion() {
 
-         return view('suggestion');
+         $suggestions = Suggestion::all();
+         return view('suggestion')->with('suggestions', $suggestions);
 
     }
     public function store(Request $request)

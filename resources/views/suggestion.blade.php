@@ -37,4 +37,37 @@
       </div>
     </div>
   </div>
+
+  <div class="my-8 px-8 max-w-7xl mx-auto">
+  <h2 class="text-2xl font-bold text-white mb-4">Vsi predlogi</h2>
+  <table class="w-full border-collapse border border-gray-800">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="px-4 py-2 border border-gray-800">Datum vnosa</th>
+        <th class="px-4 py-2 border border-gray-800">Naslov</th>
+        <th class="px-4 py-2 border border-gray-800">Opis</th>
+        <th class="px-4 py-2 border border-gray-800">Stanje</th>
+        <th class="px-4 py-2 border border-gray-800">Datum rešitve</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white bg-opacity-50">
+      @foreach($suggestions as $suggestion)
+        <tr class="@if($suggestion->solved) bg-green-100 @endif">
+          <td class="px-4 py-2 border border-gray-800">{{ $suggestion->input_date }}</td>
+          <td class="px-4 py-2 border border-gray-800">{{ $suggestion->title }}</td>
+          <td class="px-4 py-2 border border-gray-800">{{ $suggestion->description }}</td>
+          <td class="px-4 py-2 border border-gray-800">
+            @if($suggestion->solved)
+              <span class="bg-green-500 text-green-500 font-bold rounded px-2 py-1">Rešeno</span>
+            @else
+              <span class="bg-red-500 text-red-500 font-bold rounded px-2 py-1">V procesu </span>
+            @endif
+          </td>
+          <td class="px-4 py-2 border border-gray-800">{{ $suggestion->solved_date }}</td>
+        </tr>
+      @endforeach
+    </tbody>
+  </table>
+</div>
+
 </x-app-layout>
