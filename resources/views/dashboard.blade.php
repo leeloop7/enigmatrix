@@ -46,7 +46,7 @@
           @foreach ($dates as $key => $value)
 
           @forelse ($value as $event)
-          <tr class="@if($loop->parent->odd) bg-black bg-opacity-10 @endif hover:bg-white hover:bg-opacity-20 @if(Carbon::parse($key)->isToday()) bg-pink-500 bg-opacity-50 @endif">
+          <tr  @if(Carbon::parse($key)->isToday()) id="today" @endif class="@if($loop->parent->odd) bg-black bg-opacity-10 @endif hover:bg-white hover:bg-opacity-20 @if(Carbon::parse($key)->isToday()) bg-pink-500 bg-opacity-50 @endif">
             @if ($loop->first)
             <td class="px-4 py-2 font-bold whitespace-nowrapm border-l-4 border-transparent @if(Carbon::parse($key)->isWeekend()) border-red-600 @endif">
                 {{ Carbon::parse($key)->translatedFormat("d.m. l") }}
@@ -121,3 +121,12 @@
 
 
 </x-app-layout>
+<script>
+    // Find the row for today's date
+    const todayRow = document.getElementById('today');
+
+    // Scroll the page to the top of the row
+    if (todayRow) {
+        todayRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+</script>
