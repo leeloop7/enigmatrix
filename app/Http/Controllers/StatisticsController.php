@@ -11,33 +11,27 @@ use Illuminate\Http\Request;
 
 class StatisticsController extends Controller
 {
-    public function statistics() {
-
-        $events = Event::all();
-        $customers = Customer::all()->sortBy('name');
+    public function statistics()
+    {
         $projects = Project::all();
-        $jobDescs = JobDesc::all()->sortBy('name');
-        $users = User::all()->sortBy('name');
 
-        $events_time = $events->sum('event_difference');
+        return view('statistics')
+            ->with('projects', $projects);
+    }
+    public function projectStatistics(Request $request)
+    {
+        $project = Project::find($request->input('project_id'));
+        $events = Event::where('project_id', $project->id)->get();
+        $total_time = $events->sum('event_difference');
 
-        $all_hours = $events_time / 3600;
-
-        $jobDescHours = $events
-        ->groupBy('job_desc_id')
-        ->map(function ($item) {
+        $job_desc_hours = $events->groupBy('job_desc_id')->map(function ($item) {
             return $item->sum('event_difference');
         });
 
-        return view('statistics')
-        ->with('customers', $customers)
-        ->with('projects', $projects)
-        ->with('events_time', $events_time)
-        ->with('all_hours',$all_hours)
-        ->with('jobDescs',$jobDescs)
-        ->with('jobDescHours',$jobDescHours)
-        ->with('users',$users)
-        ->with('events',$events);
+        return view('statistics', [
+            'project' => $project,
+            'total_time' => $total_time,
+            'job_desc_hours' => $job_desc_hours
+        ]);
     }
-
 }

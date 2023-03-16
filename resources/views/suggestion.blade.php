@@ -43,27 +43,29 @@
   <table class="w-full border-collapse border border-gray-800">
     <thead>
       <tr class="bg-gray-200">
-        <th class="px-4 py-2 border border-gray-800">Datum vnosa</th>
+        <th class="px-4 py-2 border border-gray-800" style="width:150px">Datum vnosa</th>
         <th class="px-4 py-2 border border-gray-800">Naslov</th>
         <th class="px-4 py-2 border border-gray-800">Opis</th>
-        <th class="px-4 py-2 border border-gray-800">Stanje</th>
-        <th class="px-4 py-2 border border-gray-800">Datum rešitve</th>
+        <th class="px-4 py-2 border border-gray-800" style="width:150px">Stanje</th>
+        <th class="px-4 py-2 border border-gray-800" style="width:150px">Datum rešitve</th>
       </tr>
     </thead>
     <tbody class="bg-white bg-opacity-50">
       @foreach($suggestions as $suggestion)
         <tr class="@if($suggestion->solved) bg-green-100 @endif">
-          <td class="px-4 py-2 border border-gray-800">{{ $suggestion->input_date }}</td>
+          <td class="px-4 py-2 border border-gray-800">{{ \Carbon\Carbon::parse($suggestion->input_date)->format('d-m-Y H:i:s') }}</td>
+
           <td class="px-4 py-2 border border-gray-800">{{ $suggestion->title }}</td>
           <td class="px-4 py-2 border border-gray-800">{{ $suggestion->description }}</td>
-          <td class="px-4 py-2 border border-gray-800">
+          <td class="px-4 py-2 border border-gray-800 text-center">
             @if($suggestion->solved)
               <span class="bg-green-500 text-white font-bold rounded px-2 py-1">Rešeno</span>
             @else
               <span class="bg-red-500 text-white font-bold rounded px-2 py-1">V procesu </span>
             @endif
           </td>
-          <td class="px-4 py-2 border border-gray-800">{{ $suggestion->solved_date }}</td>
+          <td class="px-4 py-2 border border-gray-800">{{ \Carbon\Carbon::parse($suggestion->solved_date)->format('d-m-Y H:i:s') }}</td>
+
         </tr>
       @endforeach
     </tbody>

@@ -51,7 +51,7 @@
             <div class="grid grid-cols-5 gap-8 my-4">
             @foreach($groupedEventsProject as $id => $totalTime)
                 <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">
-                    <span class="font-bold"></span>{{ $projects[$id]->name }}</span> <br>
+                    <span class="font-bold">{{ $projects[$id]->name }}</span> <br>
                     <span class="font-bold text-2xl">{{ $totalTime / 3600 }}</span>
                 </div>
             @endforeach

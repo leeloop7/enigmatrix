@@ -7,7 +7,7 @@
 
 
   <div class="max-w-7xl mx-auto px-8 gap-5" x-data="{ currentDate: null }">
-    <div class="fixed inset-0 z-30 flex items-center justify-center overflow-auto bg-white bg-opacity-10" x-show="!!currentDate" x-cloak>
+    <div class="fixed inset-0 z-30 flex items-center justify-center overflow-auto bg-white bg-opacity-10" x-show="!!currentDate" x-cloak x-draggable>
         @include('dashboard.create-event')
       <table class="overflow-x-auto w-full text-sm text-white mb-24">
         <thead class="bg-white bg-opacity-10 text-xs uppercase font-medium">

@@ -17,6 +17,8 @@
             document.querySelector('[value=""]').disabled = true;
         </script>
     @endif
+    </div>
+    <div>
     @if(in_array($event_theme, [1, 9, 10]))
         @livewire('dropdowns', ['jobId' => $event_theme])
         <label class="text-white font-bold mt-4" for="event_theme">Vrsta dela</label><br>
@@ -26,10 +28,11 @@
           <option class="bg-gray-700" value="{{ $jobDescription->id }}">{{ $jobDescription->name }}</option>
           @endforeach
         </select>
-    @endif
-   </div>
-    <div>
+         <div>
         <label class="text-white font-bold" for="event_desc">Opombe (obvezen vnos)</label><br>
         <textarea type="text" rows="4" name="event_desc" placeholder="Opis dela" class="block appearance-none w-full bg-transparent border-gray-400 px-4 py-1 pl-2 pr-8 mt-1 mb-4 rounded-lg text-gray-100 text-sm" required></textarea>
       </div>
+    @endif
+   </div>
+
 </div>

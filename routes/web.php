@@ -31,8 +31,8 @@ Route::get('/', [DashboardController::class, 'numbers'])->middleware(['auth', 'v
 
 Route::get('/planner', [PlannerController::class, 'plans'])->middleware(['auth', 'verified'])->name('planner');
 
-Route::get('/statistics', [StatisticsController::class, 'statistics'])->middleware(['auth', 'verified'])->name('statistics');
-
+Route::get('/statistics', [StatisticsController::class, 'statistics'])->name('statistics');
+Route::post('/statistics/project', [StatisticsController::class, 'projectStatistics'])->name('statistics.project');
 
 Route::get('/suggestion', [SuggestionController::class, 'suggestion'])->middleware(['auth', 'verified'])->name('suggestion');
 Route::post('/suggestions', [SuggestionController::class, 'store'])->name('suggestions.store');
