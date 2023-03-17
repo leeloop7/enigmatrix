@@ -49,7 +49,7 @@ class UserEventsSheet implements FromCollection, WithTitle, WithHeadings, WithSt
     public function collection()
     {
         $events = $this->user->events()
-            ->whereMonth('event_start', '=', 1)
+            ->whereMonth('event_start', '=', 2)
             ->orderBy('event_start')
             ->get();
 
