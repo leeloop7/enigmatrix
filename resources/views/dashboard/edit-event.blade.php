@@ -73,7 +73,7 @@
                 <label class="block uppercase tracking-wide text-gray-200 text-xs font-bold mb-2 mt-4" for="grid-last-name">
                   Opis
                 </label>
-                <textarea id="event_description" class="form-control w-full @error('event_description') is-invalid @enderror" name="event_description" required autocomplete="event_description">{{ old('event_description', $event->event_desc) }}</textarea>
+                <textarea id="event_description" class="form-control w-full @error('event_description') is-invalid @enderror" name="event_description"  autocomplete="event_description">{{ old('event_description', $event->event_desc) }}</textarea>
 
                 @error('event_description')
                     <span class="invalid-feedback" role="alert">
