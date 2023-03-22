@@ -13,7 +13,7 @@
     <h3 class="text-2xl font-medium leading-6 dark:text-gray-200 text-white ml-4"><i class="fa-solid fa-calendar-star mr-2"></i>{{ $currentDate->format("M") }} {{ $currentDate->year }}</h3>
 </div>
 
-    <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-4">
+    <dl class="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-4">
       <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">
         <div class="flex flex-wrap">
             <div class="relative w-full pr-4 max-w-full flex-grow flex-1 truncate text-xs font-black uppercase text-white">
@@ -45,7 +45,7 @@
         </div>
     </div>
     </dl>
-    <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-4">
+    <dl class="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-4">
     <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">
         <div class="flex flex-wrap">
             <div class="relative w-full pr-4 max-w-full flex-grow flex-1 truncate text-xs font-black uppercase text-white">
