@@ -43,16 +43,16 @@ class ProjectDropdown extends Component
 
             $montage_time = Event::where('project_id', $this->selectedProject->id)
                 ->whereHas('job', function ($query) {
-                    $query->where('id', 1);
+                    $query->where('id', 10);
                 })
-                ->where('job_desc_id', 5)
+                ->where('job_desc_id', 102)
                 ->sum('event_difference');
 
             $demontage_time = Event::where('project_id', $this->selectedProject->id)
                 ->whereHas('job', function ($query) {
-                    $query->where('id', 1);
+                    $query->where('id', 10);
                 })
-                ->where('job_desc_id', 6)
+                ->where('job_desc_id', 103)
                 ->sum('event_difference');
         }
 
