@@ -4,34 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Project;
+use App\Models\Event;
 
 class StatisticsController extends Controller
 {
-    public function statistics()
+    public function statistics(Project $selectedProject = null)
     {
         $customers = Customer::all()->sortBy('name');
+        $events = [];
 
-        return view('statistics')
-            ->with('customers', $customers);
+        if ($selectedProject) {
+            $events = Event::where('project_id', $selectedProject->id)->get();
+        }
+
+        return view('statistics', compact('customers', 'selectedProject', 'events'));
     }
 
-    public function projectStatistics(Request $request)
+    public function projectStatistics(Project $project)
     {
-        $project = Project::find($request->input('project_id'));
-
-        $events = Event::where('project_id', $project->id)->get();
-
-        $total_time = $events->sum('event_difference');
-
-        $job_desc_hours = $events->groupBy('job_desc_id')->map(function ($item) {
-            return $item->sum('event_difference');
-        });
-
-        return [
-            'project' => $project,
-            'total_time' => $total_time,
-            'job_desc_hours' => $job_desc_hours
-        ];
+        return view("project-statistics")->with(compact("project"));
     }
 }
-

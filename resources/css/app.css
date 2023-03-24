@@ -5,3 +5,10 @@
 [x-cloak] {
     display: none;
 }
+.draggable {
+  position: absolute;
+}
+
+.draggable .modal-header {
+  cursor: move;
+}
