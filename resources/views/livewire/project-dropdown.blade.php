@@ -71,7 +71,7 @@
                                 <tr class="hover:bg-grey-lighter">
                                 <td class="py-4 px-6 border-b border-grey-light">Ravoj novih produktov:</td>
                                 <td class="py-4 px-6 text-center border-b border-grey-light">
-                                    {{ $research_time /3600 }}
+                                    {{ $razvoj_time /3600 }}
                                 </td>
                                 </tr>
                                 <tr class="hover:bg-grey-lighter">
