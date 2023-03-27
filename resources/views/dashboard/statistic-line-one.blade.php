@@ -49,7 +49,11 @@
             <div class="relative w-full pr-4 max-w-full flex-grow flex-1 truncate text-xs font-black uppercase text-white">
                 + oz - ure
                 <dd class="mt-1 text-2xl font-bold tracking-tight text-white">
-                    {{ ($totalWorkingDays * 8 > $workingSeconds / 3600) ? '-' : '' }}{{ abs($totalWorkingDays * 8 - ($workingSeconds / 3600)) }}
+                    @if ($totalWorkingDays == 0)
+                    0
+                    @else
+                        {{ ($totalWorkingDays * 8 > $workingSeconds / 3600) ? '-' : '' }}{{ abs($totalWorkingDays * 8 - ($workingSeconds / 3600)) }}
+                    @endif
                 </dd>
             </div>
             <div class="relative w-auto pl-4 flex-initial">
@@ -59,8 +63,13 @@
             </div>
         </div>
         <div class="mt-4 text-white text-xs">
-            <span class="font-bold bg-pink-500 p-1 rounded-md">{{ number_format(($totalWorkingDays * 8 - ($workingSeconds / 3600)) / ($totalWorkingDays * 8) * 100, 2) }}%
- %</span>&nbsp; od celote
+            <span class="font-bold bg-pink-500 p-1 rounded-md">
+            @if ($totalWorkingDays == 0)
+                0%
+            @else
+                {{ number_format(($totalWorkingDays * 8 - ($workingSeconds / 3600)) / ($totalWorkingDays * 8) * 100, 2) }}%
+            @endif
+            </span>&nbsp; od celote
         </div>
     </div>
     </dl>
