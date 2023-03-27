@@ -57,6 +57,12 @@
                                 </td>
                                 </tr>
                                 <tr class="hover:bg-grey-lighter">
+                                <td class="py-4 px-6 border-b border-grey-light">Zlaganje v regale:</td>
+                                <td class="py-4 px-6 text-center border-b border-grey-light">
+                                    {{ $regal_time /3600 }}
+                                </td>
+                                </tr>
+                                <tr class="hover:bg-grey-lighter">
                                 <td class="py-4 px-6 border-b border-grey-light">Servis sej. materiala:</td>
                                 <td class="py-4 px-6 text-center border-b border-grey-light">
                                     {{ $servis_time /3600 }}
@@ -180,12 +186,7 @@
                                     {{ $demontage_time /3600 }}
                                 </td>
                                 </tr>
-                                <tr class="hover:bg-grey-lighter">
-                                <td class="py-4 px-6 border-b border-grey-light">Zlaganje v regale:</td>
-                                <td class="py-4 px-6 text-center border-b border-grey-light">
-                                    {{ $regal_time /3600 }}
-                                </td>
-                                </tr>
+
                                 <tr class="hover:bg-grey-lighter">
                                 <td class="py-4 px-6 border-b border-grey-light">Vožnja na/iz terena:</td>
                                 <td class="py-4 px-6 text-center border-b border-grey-light">

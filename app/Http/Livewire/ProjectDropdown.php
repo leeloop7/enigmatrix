@@ -70,6 +70,13 @@ class ProjectDropdown extends Component
                 ->where('job_desc_id', 105)
                 ->sum('event_difference');
 
+                $regal_time = Event::where('project_id', $this->selectedProject->id)
+            ->whereHas('job', function ($query) {
+                $query->where('id', 1);
+            })
+            ->where('job_desc_id', 106)
+            ->sum('event_difference');
+
             $servis_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
@@ -210,13 +217,6 @@ class ProjectDropdown extends Component
                 $query->where('id', 10);
             })
             ->where('job_desc_id', 104)
-            ->sum('event_difference');
-
-            $regal_time = Event::where('project_id', $this->selectedProject->id)
-            ->whereHas('job', function ($query) {
-                $query->where('id', 10);
-            })
-            ->where('job_desc_id', 106)
             ->sum('event_difference');
         }
 
