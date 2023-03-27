@@ -34,7 +34,7 @@
             <h3 class="text-2xl font-medium leading-6 dark:text-gray-200 text-white mt-12">
                 <i class="fa-solid fa-chart-mixed mr-2"></i> Statistika - ure glede na stranko
             </h3>
-           <div class="grid grid-cols-5 gap-8 my-4">
+           {{-- <div class="grid grid-cols-5 gap-8 my-4">
             @foreach($groupedEvents as $id => $totalTime)
                 <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">
                     <span class="font-bold">{{ $customers[$id]->name }}</span> <br>
@@ -44,8 +44,8 @@
                 <!-- $event->customer->name  -->
                 <!-- ...  -->
             @endforeach
-           </div>
-           <h3 class="text-2xl font-medium leading-6 dark:text-gray-200 text-white mt-12">
+           </div> --}}
+           {{-- <h3 class="text-2xl font-medium leading-6 dark:text-gray-200 text-white mt-12">
                 <i class="fa-solid fa-chart-mixed mr-2"></i> Statistika - ure glede na projekt
             </h3>
             <div class="grid grid-cols-5 gap-8 my-4">
@@ -55,7 +55,7 @@
                     <span class="font-bold text-2xl">{{ $totalTime / 3600 }}</span>
                 </div>
             @endforeach
-            </div>
+            </div> --}}
         </div>
 
         <div class="max-w-7xl mx-auto gap-5 my-12">
