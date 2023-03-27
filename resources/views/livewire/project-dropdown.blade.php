@@ -199,6 +199,12 @@
                                     {{ $waiting_time /3600 }}
                                 </td>
                                 </tr>
+                                 <tr class="hover:bg-grey-lighter">
+                                <td class="py-4 px-6 border-b border-grey-light">Ostalo:</td>
+                                <td class="py-4 px-6 text-center border-b border-grey-light">
+                                    {{ $restout_time /3600 }}
+                                </td>
+                                </tr>
                             </tbody>
                             </table>
                         </div>

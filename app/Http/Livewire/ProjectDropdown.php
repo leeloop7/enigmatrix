@@ -47,6 +47,7 @@ class ProjectDropdown extends Component
         $meeting_time = null;
         $study_time = null;
         $administration_time = null;
+        $restout_time = null;
 
         if ($this->selectedProject) {
 
@@ -218,6 +219,13 @@ class ProjectDropdown extends Component
             })
             ->where('job_desc_id', 104)
             ->sum('event_difference');
+
+            $restout_time = Event::where('project_id', $this->selectedProject->id)
+            ->whereHas('job', function ($query) {
+                $query->where('id', 10);
+            })
+            ->where('job_desc_id', 1001)
+            ->sum('event_difference');
         }
 
         return view('livewire.project-dropdown', [
@@ -247,6 +255,7 @@ class ProjectDropdown extends Component
             'meeting_time' => $meeting_time,
             'study_time' => $study_time,
             'administration_time' => $administration_time,
+            'restout_time' => $restout_time,
         ]);
     }
 
