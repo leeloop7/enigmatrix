@@ -31,9 +31,9 @@
             Št. delovnih dni: <b>{{ $totalWorkingDays }}</b><br>
             Št. delovnih ur (zapisano): <b>{{ $workingSeconds / 3600 }}</b> <br>
             Št. delovnih ur (del. dni * 8): <b>{{ $totalWorkingDays * 8 }}</b> <br>
-            <h3 class="text-2xl font-medium leading-6 dark:text-gray-200 text-white mt-12">
+            {{-- <h3 class="text-2xl font-medium leading-6 dark:text-gray-200 text-white mt-12">
                 <i class="fa-solid fa-chart-mixed mr-2"></i> Statistika - ure glede na stranko
-            </h3>
+            </h3> --}}
            {{-- <div class="grid grid-cols-5 gap-8 my-4">
             @foreach($groupedEvents as $id => $totalTime)
                 <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">

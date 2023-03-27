@@ -24,6 +24,7 @@ class ProjectDropdown extends Component
             : collect();
 
         $total_time = null;
+        $home_time = null;
         $away_time = null;
         $montage_time = null;
         $demontage_time = null;
@@ -55,6 +56,12 @@ class ProjectDropdown extends Component
                     $query->where('id', 1);
                 })
                 ->sum('event_difference');
+
+            $home_time = Event::where('project_id', $this->selectedProject->id)
+            ->whereHas('job', function ($query) {
+                $query->where('id', 9);
+            })
+            ->sum('event_difference');
 
             $packing_time = Event::where('project_id', $this->selectedProject->id)
                 ->whereHas('job', function ($query) {
@@ -89,6 +96,13 @@ class ProjectDropdown extends Component
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 110)
+            ->sum('event_difference');
+
+            $technical_time = Event::where('project_id', $this->selectedProject->id)
+            ->whereHas('job', function ($query) {
+                $query->where('id', 1);
+            })
+            ->where('job_desc_id', 111)
             ->sum('event_difference');
 
             $rest_time = Event::where('project_id', $this->selectedProject->id)
@@ -210,6 +224,7 @@ class ProjectDropdown extends Component
             'customers' => $customers,
             'projects' => $projects,
             'total_time' => $total_time,
+            'home_time' => $home_time,
             'away_time' => $away_time,
             'montage_time' => $montage_time,
             'demontage_time' => $demontage_time,

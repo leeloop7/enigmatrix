@@ -207,16 +207,16 @@
             <div class="w-full">
                 <div class="w-full bg-white mx-auto rounded-md overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
                     <div class="h-12 bg-blue-500 flex items-center justify-between">
-                        <p class="mr-0 text-white text-lg pl-5">Delo na montaži:</p>
+                        <p class="mr-0 text-white text-lg pl-5">Delo od doma:</p>
                     </div>
                     <div class="flex justify-between px-5 pt-6 mb-1 text-sm text-gray-600">
                         <p>URE:</p>
                     </div>
-                    <p class="py-2 text-3xl ml-5">{{ $montage_time /3600 }}</p>
+                    <p class="py-2 text-3xl ml-5">{{ $home_time /3600 }}</p>
                     <!-- <hr > -->
                 </div>
             </div>
-            <div class="w-full">
+            {{-- <div class="w-full">
                 <div class="w-full bg-white mx-auto rounded-md overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
                     <div class="h-12 bg-blue-400 flex items-center justify-between">
                         <p class="mr-0 text-white text-lg pl-5">Delo na demontaži:</p>
@@ -227,7 +227,7 @@
                     <p class="py-2 text-3xl ml-5">{{ $demontage_time /3600 }}</p>
                     <!-- <hr > -->
                 </div>
-            </div>
+            </div> --}}
         </div>
         </div>
     @endif
