@@ -24,7 +24,7 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased" style="background:url('/img/bkg.jpg') fixed; top:0px; background-size: cover; background-repeat: none;">
+<body class="font-sans antialiased" style="background:url('/img/spring.png') fixed; top:0px; background-size: cover; background-repeat: none;">
   <div class="min-h-screen">
     @include('layouts.navigation')
 
