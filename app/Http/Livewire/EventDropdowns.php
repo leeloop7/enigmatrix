@@ -15,12 +15,12 @@ class EventDropdowns extends Component
     public $jobDescriptions;
 
     public function mount()
-    {
-        $this->jobs = Job::all();
-        $this->jobDescriptions = JobDesc::whereHas('roles', function ($query) {
-            $query->whereIn('roles.id', Auth::user()->roles->pluck('id'));
-        })->get();
-    }
+{
+    $this->jobs = Job::orderBy('position')->get();
+    $this->jobDescriptions = JobDesc::whereHas('roles', function ($query) {
+        $query->whereIn('roles.id', Auth::user()->roles->pluck('id'));
+    })->get();
+}
 
 
 
