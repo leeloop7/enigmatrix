@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EventController;
 use App\Http\Livewire\Dropdowns;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\RecordsController;
 use App\Http\Livewire\ProjectDropdown;
 use App\Http\Livewire\ProjectStatistics;
 
@@ -24,7 +25,7 @@ Route::get('/planner', [PlannerController::class, 'plans'])
 
 Route::get('/statistics', function () {
     return view('statistics');
-})->name('statistics');
+    })->name('statistics');
 
 Route::get('/statistics/projects/{projectId}', [StatisticsController::class, 'projectStatistics'])
     ->name('project-statistics');
@@ -50,6 +51,10 @@ Route::post('/administration', [AdministrationController::class, 'storeProject']
 Route::post('/administration/store-customer', [AdministrationController::class, 'storeCustomer'])
     ->middleware(['auth', 'verified', 'admin'])
     ->name('customers.store');
+
+Route::get('/records', RecordsController::class)
+    ->middleware(['auth', 'verified'])
+    ->name('records');
 
 Route::get('dropdowns', Dropdowns::class);
 

@@ -38,6 +38,11 @@
                       :active="request()->routeIs('suggestion')">
             {{ __('Predlog') }}
           </x-nav-link>
+          <x-nav-link :href="route('records')"
+            :active="request()->routeIs('records')">
+            {{ __('Zapisniki') }}
+            </x-nav-link>
+
         </div>
       </div>
 
