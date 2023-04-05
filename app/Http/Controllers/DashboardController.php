@@ -97,7 +97,7 @@ class DashboardController extends Controller
                             ->get();
         $workingSecondsLunch = $workingEventsLunch->reduce(function ($total, $event) {
             return $total + $event->event_difference;
-        }, 0) + ($workingEventsLunch->count() * 0.5);
+        }, 0) + ($workingEvents->count() * 0.5);
 
         foreach (Auth::user()->events()->orderBy('event_start')->get() as $event) {
             $startTime = Carbon::parse($event->event_start);
