@@ -89,15 +89,7 @@ class DashboardController extends Controller
             return $total + $event->event_difference;
         }, 0);
 
-        $workingEventsLunch = Auth::user()->events()
-                            ->whereNotIn('event_theme', [2, 5, 6, 7, 8, 11, 12])
-                            ->whereYear('event_start', '=', $currentDate->year)
-                            ->whereMonth('event_start', '=', $currentDate->month)
-                            ->orderBy('event_start')
-                            ->get();
-        $workingSecondsLunch = $workingEventsLunch->reduce(function ($total, $event) {
-            return $total + $event->event_difference;
-        }, 0) + ($workingEvents->count() * 0.5);
+
 
         foreach (Auth::user()->events()->orderBy('event_start')->get() as $event) {
             $startTime = Carbon::parse($event->event_start);
@@ -140,6 +132,18 @@ class DashboardController extends Controller
             });
 
         $totalWorkingDays = $workingDays->count();
+
+
+        $workingEventsLunch = Auth::user()->events()
+                            ->whereNotIn('event_theme', [2, 5, 6, 7, 8, 11, 12])
+                            ->whereYear('event_start', '=', $currentDate->year)
+                            ->whereMonth('event_start', '=', $currentDate->month)
+                            ->orderBy('event_start')
+                            ->get();
+        $workingSecondsLunch = $workingEventsLunch->reduce(function ($total, $event) {
+            return $total + $event->event_difference;
+        }, 0);
+
 
 
         $allDays = $totalWorkingDays + $timeOffs + $sickDays + $kidsDays + $holidays;
