@@ -29,12 +29,7 @@
           @endforeach
         </select>
          <div>
-         @if($event_theme == 1 && $event_jobdesc == 101)
-  <div>
-    <label class="text-white font-bold" for="event_details">Dodatne informacije (neobvezno)</label><br>
-    <textarea type="text" rows="4" name="event_details" placeholder="Dodatne informacije" class="block appearance-none w-full bg-transparent border-gray-400 px-4 py-1 pl-2 pr-8 mt-1 mb-4 rounded-lg text-gray-100 text-sm"></textarea>
-  </div>
-@endif
+
         <label class="text-white font-bold" for="event_desc">Opombe (obvezen vnos)</label><br>
         <textarea type="text" rows="4" name="event_desc" placeholder="Opis dela" class="block appearance-none w-full bg-transparent border-gray-400 px-4 py-1 pl-2 pr-8 mt-1 mb-4 rounded-lg text-gray-100 text-sm" required></textarea>
       </div>
