@@ -26,7 +26,9 @@
                 </div>
             </div>
         </div>
-
+        <div class="mt-4 text-white text-xs">
+                    <span class="font-bold bg-green-500 p-1 rounded-md">{{ number_format($workingSecondsLunch / 3600, 2, '.', ',') }}</span>&nbsp; upoštevajoč 30min malice
+                </div>
       </div>
       <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">
         <div class="flex flex-wrap">
@@ -65,11 +67,12 @@
         <div class="mt-4 text-white text-xs">
             <span class="font-bold bg-pink-500 p-1 rounded-md">
             @if ($totalWorkingDays == 0)
-                0%
+                0
             @else
-                {{ number_format(($totalWorkingDays * 8 - ($workingSeconds / 3600)) / ($totalWorkingDays * 8) * 100, 2) }}%
+                 {{ ($totalWorkingDays * 8 > $workingSecondsLunch / 3600) ? '-' : '' }}{{ number_format(abs($totalWorkingDays * 8 - ($workingSecondsLunch / 3600)), 2) }}
+
             @endif
-            </span>&nbsp; od celote
+            </span>&nbsp; upoštevajoč 30min malice
         </div>
     </div>
     </dl>
