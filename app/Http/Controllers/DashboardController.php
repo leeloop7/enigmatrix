@@ -52,6 +52,7 @@ class DashboardController extends Controller
         ->whereYear('event_start', '=', $currentDate->year)
         ->whereMonth('event_start', '=', $currentDate->month)
         ->count();
+
         $sickDays = Auth::user()->events()
         ->whereEventTheme('6')
         ->whereYear('event_start', '=', $currentDate->year)
