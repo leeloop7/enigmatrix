@@ -33,6 +33,10 @@
                       :active="request()->routeIs('administration')">
             {{ __('Administracija') }}
           </x-nav-link>
+          <x-nav-link :href="route('reports')"
+            :active="request()->routeIs('reports')">
+            {{ __('Poročila') }}
+            </x-nav-link>
           @endif
           <x-nav-link :href="route('suggestion')"
                       :active="request()->routeIs('suggestion')">
@@ -42,10 +46,7 @@
             :active="request()->routeIs('records')">
             {{ __('Zapisniki') }}
             </x-nav-link>
-            <x-nav-link :href="route('reports')"
-            :active="request()->routeIs('reports')">
-            {{ __('Poročila') }}
-            </x-nav-link>
+
 
         </div>
       </div>
