@@ -102,7 +102,7 @@
                             <td class="px-2">@if($event->job_desc_id != '0'){{ $event->jobDesc->name }}@endif</td>
                             <td class="px-2">{{ $event->project->name }}</td>
                             <td class="px-2">{{ $event->customer->name }}</td>
-                            <td class="px-2">{{ \Illuminate\Support\Str::limit($event->event_desc, 50, $end='...') }}</td>
+                            <td class="px-2">{{ \Illuminate\Support\Str::limit($event->event_desc, 200, $end='...') }}</td>
                         </tr>
                     @endforeach
                 </tbody>

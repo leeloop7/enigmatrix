@@ -12,6 +12,8 @@ use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\RecordsController;
 use App\Http\Livewire\ProjectDropdown;
 use App\Http\Livewire\ProjectStatistics;
+use App\Http\Controllers\ReportsController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +57,10 @@ Route::post('/administration/store-customer', [AdministrationController::class, 
 Route::get('/records', RecordsController::class)
     ->middleware(['auth', 'verified'])
     ->name('records');
+
+Route::get('/reports', ReportsController::class)
+    ->middleware(['auth', 'verified'])
+    ->name('reports');
 
 Route::get('dropdowns', Dropdowns::class);
 

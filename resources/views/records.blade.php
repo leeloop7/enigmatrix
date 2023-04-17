@@ -2,10 +2,6 @@
 
 <div class="max-w-7xl mx-auto px-8 text-white">
 
-
-
-</a>
-
 <table class="table-auto w-full my-12">
   <thead>
     <tr class="text-left">
