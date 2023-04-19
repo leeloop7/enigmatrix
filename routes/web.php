@@ -58,9 +58,13 @@ Route::get('/records', RecordsController::class)
     ->middleware(['auth', 'verified'])
     ->name('records');
 
-Route::get('/reports', ReportsController::class)
+Route::get('/reports', [ReportsController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('reports');
+
+Route::post('/reports', [ReportsController::class, 'store'])
+    ->middleware(['auth', 'verified'])
+    ->name('reports.store');
 
 Route::get('dropdowns', Dropdowns::class);
 

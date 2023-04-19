@@ -20,7 +20,7 @@
                     <div class="mt-2 py-2 bg-transparent rounded-lg text-gray-100">
                         <div class="flex">
                         <select id="event_hours_start" name="event_hours_start" class="bg-transparent text-xl appearance-none border rounded-lg border-gray-400">
-                            @foreach (range(00, 23) as $item) {
+                            @foreach (range(00, 24) as $item) {
                             <option class="bg-gray-700" value="{{ $item }}">{{ $item }}</option>
                             @endforeach
                         </select>
@@ -41,7 +41,7 @@
                 <div class="mt-2 py-2 bg-transparent rounded-lg text-gray-100">
                     <div class="flex">
                     <select id="event_hours_end" name="event_hours_end" class="bg-transparent text-xl appearance-none border rounded-lg border-gray-400">
-                        @foreach (range(00, 23) as $item) {
+                        @foreach (range(00, 24) as $item) {
                         <option class="bg-gray-700" value="{{ sprintf('%02d', $item) }}">{{ $item }}</option>
                         @endforeach
                     </select>

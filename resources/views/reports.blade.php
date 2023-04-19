@@ -1,6 +1,97 @@
 <x-app-layout>
 
+<div class="max-w-7xl mx-auto bg-gray-100 py-12 px-8 my-4">
 
+<form method="POST" action="{{ route('reports.store') }}">
+    @csrf
+    <div class="form-group">
+        <label for="project_id">Project</label>
+        <select class="form-control" id="project_id" name="project_id">
+            @foreach($projects as $project)
+            <option value="{{ $project->id }}">{{ $project->name }}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="report_type_id">Report Type</label>
+        <select name="report_type_id" id="report_type_id" class="form-control">
+            @foreach($reportTypes as $reportType)
+                <option value="{{ $reportType->id }}">{{ $reportType->name }}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="date">Date</label>
+        <input type="date" name="date" class="form-control" id="date">
+    </div>
+    <div class="form-group">
+        <label for="from">From</label>
+        <select name="from_hour" id="from_hour">
+        @for ($i = 0; $i < 24; $i++)
+            <option value="{{ $i }}">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
+        @endfor
+        </select>
+        <select name="from_minute" id="from_minute">
+        @for ($i = 0; $i < 60; $i += 15)
+            <option value="{{ $i }}">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
+        @endfor
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="to">To</label>
+        <select name="to_hour" id="to_hour">
+        @for ($i = 0; $i < 24; $i++)
+            <option value="{{ $i }}">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
+        @endfor
+        </select>
+        <select name="to_minute" id="to_minute">
+        @for ($i = 0; $i < 60; $i += 5)
+            <option value="{{ $i }}">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
+        @endfor
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="desc">Description</label>
+        <textarea name="desc" class="form-control" id="desc"></textarea>
+    </div>
+    <button type="submit" name="submit" class="bg-green-400 hover:bg-green-500 px-4 my-4 py-2 rounded-md">Submit</button>
+
+</form>
+</div>
+
+<div class="max-w-7xl mx-auto bg-gray-100 py-12 my-4">
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+      <table class="min-w-full divide-y divide-gray-300">
+    <thead>
+        <tr>
+            <th scope="col" class="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-1">#</th>
+            <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Datum</th>
+            <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Vrsta</th>
+            <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Od</th>
+            <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Do</th>
+            <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Skupaj</th>
+            <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Opombe</th>
+        </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200 bg-white">
+        @foreach ($reports as $report)
+            <tr>
+                <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-1">{{ $report->id }}</td>
+                <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{{ $report->date }}</td>
+                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ $report->report_type->name }}</td>
+                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ $report->from }}</td>
+                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ $report->to }}</td>
+                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ $report->hours }}</td>
+                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ $report->desc }}</td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+
+</div></div></div></div></div>
 <!-- POVZETEK -->
 <div class="max-w-7xl mx-auto bg-gray-100 py-12 my-4">
 <div class="px-4 sm:px-6 lg:px-8">
