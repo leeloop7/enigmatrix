@@ -21,6 +21,11 @@ class Project extends Model
         return $this->belongsToMany(Customer::class);
     }
 
+    public function reports()
+{
+    return $this->hasMany(Report::class);
+}
+
     public function getLengthAttribute()
     {
         $ending = Carbon::parse($this->end_date);

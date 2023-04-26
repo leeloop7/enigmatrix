@@ -50,6 +50,11 @@ Route::post('/administration', [AdministrationController::class, 'storeProject']
     ->middleware(['auth', 'verified', 'admin'])
     ->name('projects.store');
 
+Route::get('/reports/{project}', [ReportsController::class, 'show']);
+Route::get('/reports/create/{project}', [ReportsController::class, 'create'])->name('reports.create');
+Route::post('/reports', [ReportsController::class, 'store'])->name('reports.store');
+
+
 Route::post('/administration/store-customer', [AdministrationController::class, 'storeCustomer'])
     ->middleware(['auth', 'verified', 'admin'])
     ->name('customers.store');

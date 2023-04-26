@@ -19,7 +19,7 @@ class EventController extends Controller
         // CALENDAR
         $event_date = $req->event_date;
 
-        $event_start = Carbon::parse($event_date)->format('Y-m-d') . ' ' . $req->event_hours_start . ':' . $req->event_minutes_start . ':' . '00';
+        $event_start = Carbon::parse($event_date)->format('Y-m-d') . ' ' . str_pad($req->event_hours_start, 2, "0", STR_PAD_LEFT) . ':' . str_pad($req->event_minutes_start, 2, "0", STR_PAD_LEFT) . ':' . '00';
         $event_end = Carbon::parse($event_date)->format('Y-m-d') . ' ' . $req->event_hours_end . ':' . $req->event_minutes_end . ':' . '00';
         $event_theme = $req->event_theme;
         $event_desc = $req->event_desc;
@@ -95,7 +95,8 @@ class EventController extends Controller
         $event->project_id = $request->project_id;
         $event->customer_id = $request->customer_id;
         $event->event_desc = $request->event_description;
-        $eventStart = Carbon::createFromFormat('Y-m-d H:i:s', $oldEventStartDate.' '.$request->event_hours_start.':'.$request->event_minutes_start.':00');
+        $event_start = Carbon::parse($event_date)->format('Y-m-d') . ' ' . str_pad($req->event_hours_start, 2, "0", STR_PAD_LEFT) . ':' . str_pad($req->event_minutes_start, 2, "0", STR_PAD_LEFT) . ':' . '00';
+
         $event->event_start = $eventStart;
         $eventEnd = Carbon::createFromFormat('Y-m-d H:i:s', $oldEventStartDate.' '.$request->event_hours_end.':'.$request->event_minutes_end.':00');
         $event->event_end = $eventEnd;

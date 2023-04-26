@@ -9,6 +9,8 @@ class ReportType extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     public function reports()
     {
         return $this->hasMany(Report::class);
