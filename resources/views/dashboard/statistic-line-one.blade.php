@@ -13,7 +13,7 @@
     <h3 class="text-2xl font-medium leading-6 dark:text-gray-200 text-white ml-4"><i class="fa-solid fa-calendar-star mr-2"></i>{{ $currentDate->format("M") }} {{ $currentDate->year }}</h3>
 </div>
 
-    <dl class="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-4">
+    <dl class="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-3">
       <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">
         <div class="flex flex-wrap">
             <div class="relative w-full pr-4 max-w-full flex-grow flex-1 truncate text-xs font-black uppercase text-white">
@@ -76,7 +76,7 @@
         </div>
     </div>
     </dl>
-    <dl class="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-4">
+    <dl class="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-3">
     <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">
         <div class="flex flex-wrap">
             <div class="relative w-full pr-4 max-w-full flex-grow flex-1 truncate text-xs font-black uppercase text-white">
@@ -96,7 +96,7 @@
     <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">
         <div class="flex flex-wrap">
             <div class="relative w-full pr-4 max-w-full flex-grow flex-1 truncate text-xs font-black uppercase text-white">
-                Bolniška (dni)
+                Bolniška in nega (dni)
                 <dd class="mt-1 text-2xl font-bold tracking-tight text-white">{{ $sickDays }}</dd>
             </div>
             <div class="relative w-auto pl-4 flex-initial">
@@ -109,7 +109,7 @@
             <span class="bg-teal-300 p-1 rounded-md font-bold">{{ number_format($sickDaysProcents, 2, '.', ',') }} %</span>&nbsp; od celote
         </div>
     </div>
-    <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">
+    {{-- <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">
         <div class="flex flex-wrap">
             <div class="relative w-full pr-4 max-w-full flex-grow flex-1 truncate text-xs font-black uppercase text-white">
                 Nega (dni)
@@ -124,7 +124,7 @@
         <div class="mt-4 text-white text-xs">
             <span class="bg-teal-300 p-1 rounded-md font-bold">{{ number_format($kidsDaysProcents, 2, '.', ',') }} %</span>&nbsp; od celote
         </div>
-    </div>
+    </div> --}}
     <div class="overflow-hidden rounded-lg bg-white bg-opacity-10 px-4 py-5 shadow sm:p-6 border-white border-opacity-25 border shadow-md">
         <div class="flex flex-wrap">
             <div class="relative w-full pr-4 max-w-full flex-grow flex-1 truncate text-xs font-black uppercase text-white">
