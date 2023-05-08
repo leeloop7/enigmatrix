@@ -40,7 +40,8 @@ class ReportsController extends Controller
 
         $report->save();
 
-        return redirect('/reports')->with('success', 'Report has been added');
+        return redirect('/reports/' . $request->project_id)->with('success', 'Report has been added');
+
     }
 
     public function create(Project $project)
@@ -52,11 +53,11 @@ class ReportsController extends Controller
     }
 
     public function show(Project $project)
-{
-    $reports = $project->reports()->with('project', 'reportType')->get();
-    $reportTypes = ReportType::all();
-    return view('reports.show', ['reports' => $reports, 'project' => $project, 'reportTypes' => $reportTypes]);
-}
+    {
+        $reports = $project->reports()->with('project', 'reportType')->get();
+        $reportTypes = ReportType::all();
+        return view('reports.show', ['reports' => $reports, 'project' => $project, 'reportTypes' => $reportTypes]);
+    }
 
 
     public function index()
