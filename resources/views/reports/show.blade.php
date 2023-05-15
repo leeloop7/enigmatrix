@@ -33,20 +33,58 @@
         </thead>
         <tbody class="divide-y divide-gray-200 bg-white">
             @foreach ($reports as $report)
-            <tr @click="open = !open">
+            @php
+                $rowId = 'open_' . $report->id;
+            @endphp
+            <tr @click="{{ $rowId }} = !{{ $rowId }}">
                 <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-1">{{ $report->id }}</td>
                 <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{{ $report->date }}</td>
                 <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ $report->reportType ? $report->reportType->name : '-' }}</td>
                 <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ \Carbon\Carbon::createFromTimeString($report->from)->format('H:i') }}</td>
                 <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ \Carbon\Carbon::createFromTimeString($report->to)->format('H:i') }}</td>
                 <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ Carbon::parse($report->from)->diff(Carbon::parse($report->to))->format('%H:%I') }}</td>
-                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ $report->desc }}</td>
+                <td class=" px-2 py-2 text-sm text-gray-500">{{ $report->desc }}</td>
             </tr>
-            <tr x-show="open">
+            <tr x-show="{{ $rowId }}">
                 <td colspan="7">
-                    <div class="bg-gray-100 px-4 py-2">
-                        <p class="text-gray-900 font-medium">{{ $report->desc }}</p>
-                    </div>
+                    <table class="min-w-full bg-green-200 divide-y divide-gray-300">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="whitespace-nowrap py-1.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-1">#</th>
+                                <th scope="col" class="whitespace-nowrap px-2 py-1.5 text-left text-sm font-semibold text-gray-900">Monter</th>
+                                <th scope="col" class="whitespace-nowrap px-2 py-1.5 text-left text-sm font-semibold text-gray-900">Od</th>
+                                <th scope="col" class="whitespace-nowrap px-2 py-1.5 text-left text-sm font-semibold text-gray-900">Do</th>
+                                <th scope="col" class="whitespace-nowrap px-2 py-1.5 text-left text-sm font-semibold text-gray-900">Skupaj</th>
+                                <th scope="col" class="whitespace-nowrap px-2 py-1.5 text-left text-sm font-semibold text-gray-900">Opombe</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 bg-green-100">
+                            <tr>
+                                <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-1">1</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">Jože Novak</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">07:00</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">20:00</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">13:00</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">Vse ok.</td>
+                            </tr>
+                            <tr>
+                                <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-1">1</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">Franci Petek</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">07:00</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">20:00</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">13:00</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">Vse ok.</td>
+                            </tr>
+                            <tr>
+                                <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-1">1</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">Miha Pelc</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">07:00</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">20:00</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">13:00</td>
+                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">Vse ok.</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </td>
             </tr>
             @endforeach
