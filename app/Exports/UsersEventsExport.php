@@ -23,6 +23,7 @@ use Carbon\Carbon;
 
 class UsersEventsExport implements WithMultipleSheets
 {
+
     public function sheets(): array
     {
         $users = User::all();
@@ -79,17 +80,33 @@ public function collection()
         ];
 
         foreach ($eventsOfDay as $event) {
-    if (!in_array($event->job_id, [1, 9, 10])) { // Only process events if job_id is not 1, 9 or 10
+    if (!in_array($event->job_id, [1, 9])) { // Only process events if job_id is not 1, 9
         if ($event->job_id == 2 && $event->event_difference <= 2700) { // Hide event with job_id = 2 and event_difference <= 45 minutes
             continue;
         }
 
-        $data[] = [
-            $event->job->name, // Include the job name in the first column
-            Carbon::createFromFormat('Y-m-d H:i:s', $event->event_start)->format('H:i:s'),
-            Carbon::createFromFormat('Y-m-d H:i:s', $event->event_end)->format('H:i:s'),
-            gmdate('H:i:s', $event->event_difference),
-        ];
+        if ($event->job_id === 10 || $event->job_id === 13) {
+            $data[] = [
+                [
+                    $event->job->name, // Include the job name in the first column
+                    Carbon::createFromFormat('Y-m-d H:i:s', $event->event_start)->format('H:i:s'),
+                    Carbon::createFromFormat('Y-m-d H:i:s', $event->event_end)->format('H:i:s'),
+                    gmdate('H:i:s', $event->event_difference),
+                ],
+                [
+                    $event->event_desc
+                ]
+            ];
+        } else {
+            $data[] = [
+                [
+                    $event->job->name, // Include the job name in the first column
+                    Carbon::createFromFormat('Y-m-d H:i:s', $event->event_start)->format('H:i:s'),
+                    Carbon::createFromFormat('Y-m-d H:i:s', $event->event_end)->format('H:i:s'),
+                    gmdate('H:i:s', $event->event_difference),
+                ]
+            ];
+        }
     }
 }
     }
