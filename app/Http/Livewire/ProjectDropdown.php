@@ -53,10 +53,11 @@ class ProjectDropdown extends Component
 
             // PODBREZNIK
             $total_time = Event::where('project_id', $this->selectedProject->id)
-                ->whereHas('job', function ($query) {
-                    $query->where('id', 1);
-                })
-                ->sum('event_difference');
+    ->where('customer_id', $this->selectedCustomer->id)
+    ->whereHas('job', function ($query) {
+        $query->where('id', 1);
+    })
+    ->sum('event_difference');
 
             $home_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
