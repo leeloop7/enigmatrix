@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto">
-        <div class="max-w-7xl mx-auto">
+    <div class="mx-auto max-w-7xl">
+        <div class="mx-auto max-w-7xl">
             <livewire:project-dropdown />
         </div>
     </div>

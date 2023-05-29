@@ -52,16 +52,12 @@ class ProjectDropdown extends Component
         if ($this->selectedProject) {
 
             // PODBREZNIK
-            $total_time = Event::where('project_id', $this->selectedProject->id)
+            $total_time = Event::where('customer_id', $this->customerId)
+                ->where('project_id', $this->selectedProject->id)
                 ->whereHas('job', function ($query) {
                     $query->where('id', 1);
-                });
-
-            if ($this->selectedCustomer) {
-                $total_time->where('customer_id', $this->selectedCustomer->id);
-            }
-
-            $total_time = $total_time->sum('event_difference');
+                })
+                ->sum('event_difference');
 
             $home_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
@@ -264,7 +260,8 @@ class ProjectDropdown extends Component
         ]);
     }
 
-    public function updatedCustomerId($value) {
+    public function updatedCustomerId() {
+        $this->projectId = null;
         $this->selectedProject = null;
     }
 
