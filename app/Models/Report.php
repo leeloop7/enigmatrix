@@ -18,4 +18,9 @@ class Report extends Model
     {
         return $this->belongsTo(ReportType::class);
     }
+    public function outsideWorkers()
+    {
+        return $this->belongsToMany(OutsideWorker::class);
+    }
+
 }

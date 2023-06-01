@@ -53,7 +53,7 @@ class UserEventsSheet implements FromCollection, WithTitle, WithColumnWidths, Wi
 public function collection()
 {
     $events = $this->user->events()
-        ->whereMonth('event_start', '=', 4)
+        ->whereMonth('event_start', '=', 5)
         ->orderBy('event_start')
         ->get()
         ->groupBy(function ($event) {

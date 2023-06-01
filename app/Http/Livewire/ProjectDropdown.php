@@ -59,125 +59,125 @@ class ProjectDropdown extends Component
                 })
                 ->sum('event_difference');
 
-            $home_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $home_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 9);
             })
             ->sum('event_difference');
 
-            $packing_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $packing_time = Event::where('project_id', $this->selectedProject->id)
                 ->whereHas('job', function ($query) {
                     $query->where('id', 1);
                 })
                 ->where('job_desc_id', 105)
                 ->sum('event_difference');
 
-                $regal_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+                $regal_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 106)
             ->sum('event_difference');
 
-            $servis_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $servis_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 107)
             ->sum('event_difference');
 
-            $inventura_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $inventura_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 108)
             ->sum('event_difference');
 
-            $razvoj_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $razvoj_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 109)
             ->sum('event_difference');
 
-            $cleaning_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $cleaning_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 110)
             ->sum('event_difference');
 
-            $technical_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $technical_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 111)
             ->sum('event_difference');
 
-            $rest_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $rest_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 1001)
             ->sum('event_difference');
 
-            $comercial_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $comercial_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 1002)
             ->sum('event_difference');
 
-            $design_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $design_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 1003)
             ->sum('event_difference');
 
-            $analitic_time = $administration_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $analitic_time = $administration_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 1004)
             ->sum('event_difference');
 
-            $planing_time = $administration_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $planing_time = $administration_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 1005)
             ->sum('event_difference');
 
-            $research_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $research_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 1006)
             ->sum('event_difference');
 
-            $coordination_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $coordination_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 1007)
             ->sum('event_difference');
 
-            $meeting_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $meeting_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 1008)
             ->sum('event_difference');
 
-            $study_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $study_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
             ->where('job_desc_id', 1009)
             ->sum('event_difference');
 
-            $administration_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $administration_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 1);
             })
@@ -186,13 +186,13 @@ class ProjectDropdown extends Component
 
             // TEREN !!!
 
-            $away_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $away_time = Event::where('project_id', $this->selectedProject->id)
                 ->whereHas('job', function ($query) {
                     $query->where('id', 10);
                 })
                 ->sum('event_difference');
 
-            $montage_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $montage_time = Event::where('project_id', $this->selectedProject->id)
                 ->whereHas('job', function ($query) {
                     $query->where('id', 10);
                 })
@@ -200,28 +200,28 @@ class ProjectDropdown extends Component
                 ->sum('event_difference');
 
 
-            $demontage_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $demontage_time = Event::where('project_id', $this->selectedProject->id)
                 ->whereHas('job', function ($query) {
                     $query->where('id', 10);
                 })
                 ->where('job_desc_id', 103)
                 ->sum('event_difference');
 
-            $driving_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $driving_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 10);
             })
             ->where('job_desc_id', 101)
             ->sum('event_difference');
 
-            $waiting_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $waiting_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 10);
             })
             ->where('job_desc_id', 104)
             ->sum('event_difference');
 
-            $restout_time = Event::where('customer_id', $this->customerId)->where('project_id', $this->selectedProject->id)
+            $restout_time = Event::where('project_id', $this->selectedProject->id)
             ->whereHas('job', function ($query) {
                 $query->where('id', 10);
             })
