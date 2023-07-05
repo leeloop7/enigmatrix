@@ -59,11 +59,11 @@ class ProjectDropdown extends Component
                 })
                 ->sum('event_difference');
 
-            $home_time = Event::where('project_id', $this->selectedProject->id)
-            ->whereHas('job', function ($query) {
-                $query->where('id', 9);
-            })
-            ->sum('event_difference');
+            // $home_time = Event::where('project_id', $this->selectedProject->id)
+            // ->whereHas('job', function ($query) {
+            //     $query->where('id', 9);
+            // })
+            // ->sum('event_difference');
 
             $packing_time = Event::where('project_id', $this->selectedProject->id)
                 ->whereHas('job', function ($query) {
